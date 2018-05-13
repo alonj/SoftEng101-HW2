@@ -11,4 +11,4 @@ add_executable(hw2AttachedCodeFiles
         Interface.cpp
         Map.cpp
         RobotDB.cpp
-        RobotDB.h)
+        RobotDB.h Printer.h Robot.cpp RobotDB.cpp RobotDB.h Interface.cpp)

@@ -1,22 +1,8 @@
+//
+// Created by alonj on 5/13/18.
+//
+
 #include "Interface.h"
-#include <vector>
-#include <queue>
-#include "RobotDB.h"
-#include "Map.h"
-#include "Printer.h"
-
-//
-// Created by alonj on 18-Apr-18.
-//
-
-/**
- * Module interprets and classifies user input into appropriate robot methods in RobotDB.h
- */
-
-extern vector<string> robotName;
-extern vector<int> robotScore;
-extern vector<int> robotBinStatus;
-extern int robotCount;
 
 using namespace std;
 
@@ -28,76 +14,39 @@ void CommandRoutine()
     cin >> currentCommand;
     while (!cin.eof())
     {
-        if (currentCommand == "Move")
+        if (currentCommand == "Move") // TODO implement in RobotDB.h
         {
-            cin >> robotID;
-            cin >> direction;
-            if (dbRobotInMap(robotID)) // call Move method if robot is in valid coords.
-            {
-                dbMove(robotID, direction);
-                PrintRobotPlace(robotID, dbGetRobotPos(robotID, 'x'),
-                                dbGetRobotPos(robotID, 'y'));
-            }
         }
-        else if (currentCommand == "AddDirt")
+        else if (currentCommand == "MoveMulti") // TODO implement in RobotDB.h
+        { // Move
+        }
+        else if (currentCommand == "MoveBuild") // TODO implement in RobotDB.h
+        { // Move + AddPath
+        }
+        else if (currentCommand == "Clean") // TODO implement in RobotDB.h
         {
-            cin >> coordX;
-            cin >> coordY;
-            if (!dbExistInCoords(coordX, coordY) && inMapLimit(coordX, coordY))
-                addDirt(coordX, coordY); // if coordinates valid and no robot exists there, add dirt.
         }
-        else if (currentCommand == "Clean")
+        else if (currentCommand == "Place") // TODO implement in RobotDB.h
         {
-            cin >> robotID;
-            if (dbRobotInMap(robotID))
-            {
-                dbClean(robotID); // clean coordinates of robot with name robotID.
-                PrintClean(robotID, dbGetRobotPos(robotID, 'x'),
-                           dbGetRobotPos(robotID, 'y'));
-            }
         }
-        else if (currentCommand == "Place")
+        else if (currentCommand == "Delete") // TODO implement in RobotDB.h
         {
-            cin >> robotID;
-            cin >> coordX;
-            cin >> coordY;
-            bool placementSuccess = dbPlace(robotID, coordX, coordY); // place new robot.
-            if (placementSuccess)
-                PrintRobotPlace(robotID, coordX, coordY);
         }
-        else if (currentCommand == "Delete")
+        else if (currentCommand == "AddDirt") // TODO implement in Map.h
         {
-            cin >> robotID;
-            dbDelete(robotID);
         }
-        else if (currentCommand == "MoveMulti")
+        else if (currentCommand == "AddWall") // TODO implement in Map.h
         {
-            string nextDirection;
-            vector<string> directionList;
-            cin >> robotID;
-            cin >> nextDirection;
-            while (nextDirection != "end") // save set on instructions into vector.
-            {
-                directionList.push_back(nextDirection);
-                cin >> nextDirection;
-            }
-            for (vector<string>::iterator it = directionList.begin();
-                 it != directionList.end(); it++)
-                if (dbRobotInMap(robotID))
-                {
-                    dbMove(robotID, *it); // Move robot per instructions and print only after "end" instruction received.
-                    PrintRobotPlace(robotID, dbGetRobotPos(robotID, 'x'),
-                                    dbGetRobotPos(robotID, 'y'));
-                }
         }
-//        printMap();
+        else if (currentCommand == "AddPath") // TODO implement in Map.h
+        {
+        }
         cin >> currentCommand;
     }
 }
 
-void StartControl()
+void StartControl(Map* map)
 {
-    robotCount = 0;
     cout << "Start entering commands:" << endl;
     CommandRoutine();
     PrintTable(robotName, robotScore, robotBinStatus);

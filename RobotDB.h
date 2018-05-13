@@ -1,64 +1,33 @@
 //
-// Created by alonj on 18-Apr-18.
+// Created by alonj on 5/13/18.
 //
 
-#ifndef HW1ATTACHEDCODEFILES_ROBOTDB_H
-#define HW1ATTACHEDCODEFILES_ROBOTDB_H
+#ifndef HW2ATTACHEDCODEFILES_ROBOTDB_H
+#define HW2ATTACHEDCODEFILES_ROBOTDB_H
 
 #include <vector>
-#include <string>
+#include "Robot.h"
+#include "Map.h"
 
-using namespace std;
+typedef std::vector<Robot*> RobotVec;
+typedef std::vector<Robot*>::iterator RobotVec_it;
+typedef std::vector<Robot*>::const_iterator RobotVec_cit;
 
-/**
- * Change position of selected (existing) robot
- * @param robotID : name of selected robot.
- * @param direction : direction of movement.
- */
-void dbMove(string &robotID, string &direction);
 
-/**
- * Place a new robot on the map.
- * @param robotID : name of new robot.
- * @param posX : x-coordinate position of robot.
- * @param posY : y-coordinate position of robot.
- * @return : false if placed in illegal coordinates (i.e failed placement), true otherwise.
- */
-bool dbPlace(string &robotID, int &posX, int &posY);
+class RobotDB {
+private:
+    RobotVec robots;
+    Map* map;
+    unsigned robotCount;
+public:
+    RobotDB(Map *new_map){  map = new_map;
+                            robotCount = 0; };
+    ~RobotDB() {};
+    void DeleteRobot(const std::string& rname);
+    bool AddRobot(string rname, Coordinate robotCoor);
+    void MoveRobot(string rname, string direction);
 
-/**
- * Clean cell where the selected robot is at.
- * @param robotID : name of robot to clean cell at.
- */
-void dbClean(string &robotID);
+};
 
-/**
- * Delete existing robot.
- * @param robotID : name of robot for deletion.
- */
-void dbDelete(string &robotID);
 
-/**
- * Check if a robot is currently in given coordinates.
- * @param posX : Coordinate X.
- * @param posY : Coordinate Y.
- * @return : True if robot exists there.
- */
-bool dbExistInCoords(int &posX, int &posY);
-
-/**
- * Check if selected robot is within map limits.
- * @param robotID : Robot to check.
- * @return : True if robot is in valid coordinates.
- */
-bool dbRobotInMap(string &robotID);
-
-/**
- * Get the coordinates of selected robot.
- * @param robotID : Name of selected robot.
- * @param type : either 'x' or 'y', for coordinates x and y, respectively.
- * @return : Coordinate value x or y.
- */
-int dbGetRobotPos(string &robotID, char type);
-
-#endif //HW1ATTACHEDCODEFILES_ROBOTDB_H
+#endif //HW2ATTACHEDCODEFILES_ROBOTDB_H

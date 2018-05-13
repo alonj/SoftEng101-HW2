@@ -19,6 +19,7 @@ private:
     Coordinate coordinate;
     const string name;
     int dust_bin;
+    int score;
     
 public:
     
@@ -42,6 +43,15 @@ public:
         coordinate.print();
         cout << "dust bin: " << dust_bin << endl;
     }
+
+    /**
+     * function changes robot's coordinate in the direction passed to method.
+     * @param Direction : Direction in which robot will move.
+     */
+    void Move(string& Direction);
+
+
+
 };
 
 #endif
