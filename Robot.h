@@ -9,22 +9,27 @@
 
 using namespace std;
 
+typedef enum{COMMUNICABLE = 0, NON_COMMUNICABLE = 1} connection_e;
 
 /**
  * Robot class role is to hold all the data and operations (function) of a single robot.
  */
 class Robot
 {
+
 private:
     Coordinate coordinate;
     const string name;
     int dust_bin;
     int score;
-    
+
 public:
-    
     // #################### Class methods ####################
-    
+
+    Robot(const Coordinate &coordinate, const string &name) : coordinate(coordinate), name(name) {}
+
+    ~Robot();
+
     /**
      * function that prints robot location
      */
@@ -50,6 +55,26 @@ public:
      */
     void Move(string& Direction);
 
+    /**
+     * function returns robot's name
+     * @return string of robot name
+     */
+    inline const string &getName() const {
+        return name;
+    }
+
+    /**
+     * function returns robot's coordinate
+     * @return object of Coordinate type
+     */
+    inline Coordinate getCoordinate() const {
+        return coordinate;
+    }
+
+    void setCoordinate(const Coordinate &coordinate) {
+        Coordinate newCoord(coordinate);
+        Robot::coordinate = newCoord;
+    }
 
 
 };

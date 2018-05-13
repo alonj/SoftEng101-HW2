@@ -1,14 +1,18 @@
 cmake_minimum_required(VERSION 3.9)
 project(hw2AttachedCodeFiles)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 98)
 
 add_executable(hw2AttachedCodeFiles
+        main.cpp
         Coordinate.h
         Interface.h
-        main.cpp
-        Robot.h
         Interface.cpp
+        Robot.h
+        Robot.cpp
+        Map.h
         Map.cpp
+        RobotDB.h
         RobotDB.cpp
-        RobotDB.h Printer.h Robot.cpp RobotDB.cpp RobotDB.h Interface.cpp)
+        Printer.h
+        )

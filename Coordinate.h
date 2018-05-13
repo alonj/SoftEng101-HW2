@@ -23,7 +23,25 @@ public:
     {  
            std::cout << " at: " << x << "," << y << std::endl;  
     };
-     
+
+    bool operator==(const Coordinate &rhs) const {
+        return x == rhs.x &&
+               y == rhs.y;
+    }
+
+    bool operator!=(const Coordinate &rhs) const {
+        return !(rhs == *this);
+    }
+
+    int getX() const {
+        return x;
+    }
+
+    int getY() const {
+        return y;
+    }
+
+
 };   
 
 #endif 
