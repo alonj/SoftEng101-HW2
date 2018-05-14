@@ -17,30 +17,41 @@ using std::string;
 typedef int size_type;
 typedef int** grid_type;
 
+int gmap [S_HIGH][S_WIDTH] =
+        {
+                { 0 , 1 , 1 , 1 , 1 , 1 , 1},
+                { 1 , 2 , 2 , 0 , 1 , 0 , 1},
+                { 0 , 0 , 1 , 1 , 1 , 2 , 1},
+                { 1 , 0 , 0 , 0 , 0 , 0 , 1},
+                { 1 , 1 , 1 , 2 , 1 , 0 , 1},
+                { 1 , 0 , 0 , 0 , 0 , 2 , 1},
+                { 1 , 0 , 1 , 1 , 1 , 1 , 1}
+        } ;
+
 class Map {
 private:
-    int gmap [S_HIGH][S_WIDTH] =
-            {
-                    { 0 , 1 , 1 , 1 , 1 , 1 , 1},
-                    { 1 , 2 , 2 , 0 , 1 , 0 , 1},
-                    { 0 , 0 , 1 , 1 , 1 , 2 , 1},
-                    { 1 , 0 , 0 , 0 , 0 , 0 , 1},
-                    { 1 , 1 , 1 , 2 , 1 , 0 , 1},
-                    { 1 , 0 , 0 , 0 , 0 , 2 , 1},
-                    { 1 , 0 , 1 , 1 , 1 , 1 , 1}
-            } ;
+    int* amap;
+    int map_h;
+    int map_w;
 public:
+/** Constructor defaults to gmap as outlines in the HW instructions
+ * map width/height default to S_WIDTH, S_HIGH (respectively)
+ */
+    Map(){  amap = *gmap;
+            map_h = S_HIGH;
+            map_w = S_WIDTH;};
+
 /** Add a wall to the map in the given coordinate
  * @param coord : given coordinate
  */
     void addWall(const Coordinate& coord);
 
-    /** Add a clean path to the map in the given coordinate
+    /** Add a clean path to the map in the given coordinate. if coordinate > 0,0 and outside map, increases map size
  * @param coord : given coordinate
  */
     void addPath(const Coordinate& coord);
 
-/** Add a dirt to the map, meaning place 1 at x,y location
+/** Add a dirt to the map, meaning place 1 at x,y location. if coordinate > 0,0 and outside map, increases map size
  * @param coord: coordinate to add wall in
  */
     void addDirt(const Coordinate& coord);
@@ -64,6 +75,15 @@ public:
  * @return : 0 if the cell is clean, 1 if wall, 2 if dirty.
  */
     inline int getCellStatus(Coordinate& coord){return gmap[coord.getX()][coord.getY()];};
+
+
+    /**
+     * Function copies the map into a map with dimensions set by newHeight, newWidth, and replaces the old one.
+     * defaults new cells to 1 (walls)
+     * @param newHeight : the new map's height
+     * @param newWidth ; the new map's width
+     */
+    void increaseMapDimension(int newHeight, int newWidth);
 };
 
 
