@@ -54,7 +54,7 @@ bool Map::inMapLimit(const Coordinate &coord)
 }
 
 void Map::increaseMapDimension(int newHeight, int newWidth) {
-    int* newMap = new int[newHeight][newWidth];
+    int* newMap = new int[newHeight*newWidth];
     for (int i = 0; i < map_h; i++) // copy the existing map into the new larger map
         for (int j = 0; j < map_w ; j++)
             newMap[i*map_w + j] = amap[i*map_w + j];
@@ -64,6 +64,18 @@ void Map::increaseMapDimension(int newHeight, int newWidth) {
     amap = newMap; // replace the existing map and its attributes in the object
     map_h = newHeight;
     map_w = newWidth;
+}
+
+cell_status Map::getCellStatus(Coordinate &coord) {
+    int x = coord.getX();
+    int y = coord.getY();
+    int numeric_status = amap[x*map_w + y];
+    switch(numeric_status){
+        case 0: return CLEAN;
+        case 1: return WALL;
+        default: return DIRTY;
+    }
+
 }
 
 //########################################################################################

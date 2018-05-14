@@ -15,10 +15,9 @@ class Interface
 {
 private:
     RobotDB* pRobots;
-    
     const Interface& operator=(const Interface& Robs_control); //Assignment operator
     Interface(const Interface& Robs_control); //Copy constructor
-
+    Map* iMap;
 public:
     //Constructors
     Interface(RobotDB* pNew_Robots): pRobots(pNew_Robots){}
@@ -31,6 +30,7 @@ public:
      * @param map: Map object representing the map
      */
     void StartControl(Map* map);
+    void CommandRoutine();
 };
 
 #endif

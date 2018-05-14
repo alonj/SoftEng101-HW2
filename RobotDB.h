@@ -18,18 +18,20 @@ class RobotDB {
 private:
     RobotVec robots;
     Map* map;
-    unsigned robotCount;
     Coordinate getRobotCoords(string &rname);
     int getRobotIndex(const string &rname);
 public:
-    explicit RobotDB(Map *new_map){  map = new_map;
-                            robotCount = 0; };
-    ~RobotDB() = default;
+    explicit RobotDB(Map *new_map){  map = new_map; };
+    ~RobotDB();
     void DeleteRobot(const std::string& rname);
-    bool AddRobot(string rname, Coordinate robotCoor);
-    void MoveRobot(string rname, string direction);
+    bool PlaceRobot(string rname, Coordinate coordinate);
+    bool MoveRobot(string rname, string direction);
     bool ExistsInCoord(Coordinate &coord);
-
+    void CleanRobot(string &rname);
+    void printClean(string &rname);
+    void printLocation(string &rname);
+    Coordinate directionToCoords(string &rname, string &dir);
+    connection_e robotCommunicable(string &rname);
 };
 
 

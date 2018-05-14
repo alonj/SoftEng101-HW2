@@ -33,14 +33,25 @@ public:
         return !(rhs == *this);
     }
 
-    int getX() const {
+    inline int getX() const {
         return x;
     }
 
-    int getY() const {
+    inline int getY() const {
         return y;
     }
 
+    inline void setX(int x) {
+        Coordinate::x = x;
+    }
+
+    inline void setY(int y) {
+        Coordinate::y = y;
+    }
+
+    inline bool outOfBounds() const {
+        return x<0 && y<0;
+    }
 
 };   
 

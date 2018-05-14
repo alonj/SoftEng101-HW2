@@ -16,17 +16,7 @@ using std::string;
 
 typedef int size_type;
 typedef int** grid_type;
-
-int gmap [S_HIGH][S_WIDTH] =
-        {
-                { 0 , 1 , 1 , 1 , 1 , 1 , 1},
-                { 1 , 2 , 2 , 0 , 1 , 0 , 1},
-                { 0 , 0 , 1 , 1 , 1 , 2 , 1},
-                { 1 , 0 , 0 , 0 , 0 , 0 , 1},
-                { 1 , 1 , 1 , 2 , 1 , 0 , 1},
-                { 1 , 0 , 0 , 0 , 0 , 2 , 1},
-                { 1 , 0 , 1 , 1 , 1 , 1 , 1}
-        } ;
+typedef enum{CLEAN = 0, WALL = 1, DIRTY = 2} cell_status;
 
 class Map {
 private:
@@ -37,7 +27,17 @@ public:
 /** Constructor defaults to gmap as outlines in the HW instructions
  * map width/height default to S_WIDTH, S_HIGH (respectively)
  */
-    Map(){  amap = *gmap;
+    Map(){ int gmap [S_HIGH][S_WIDTH] =
+        {
+            { 0 , 1 , 1 , 1 , 1 , 1 , 1},
+            { 1 , 2 , 2 , 0 , 1 , 0 , 1},
+            { 0 , 0 , 1 , 1 , 1 , 2 , 1},
+            { 1 , 0 , 0 , 0 , 0 , 0 , 1},
+            { 1 , 1 , 1 , 2 , 1 , 0 , 1},
+            { 1 , 0 , 0 , 0 , 0 , 2 , 1},
+            { 1 , 0 , 1 , 1 , 1 , 1 , 1}
+        } ;
+            amap = *gmap;
             map_h = S_HIGH;
             map_w = S_WIDTH;};
 
@@ -74,7 +74,7 @@ public:
  * @param coord : coordinate to return status of.
  * @return : 0 if the cell is clean, 1 if wall, 2 if dirty.
  */
-    inline int getCellStatus(Coordinate& coord){return gmap[coord.getX()][coord.getY()];};
+    cell_status getCellStatus(Coordinate& coord);
 
 
     /**
