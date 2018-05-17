@@ -51,6 +51,7 @@ void Interface::CommandRoutine()
                     iMap->addPath(rCoord);
                 if(pRobots->MoveRobot(rname, direction))
                     pRobots->printLocation(rname);
+
             }
 
         }
@@ -58,8 +59,8 @@ void Interface::CommandRoutine()
         {
             cin >> rname;
             if(pRobots->robotCommunicable(rname) == COMMUNICABLE){
-                pRobots->CleanRobot(rname);
-                pRobots->printClean(rname);
+                if(pRobots->CleanRobot(rname))
+                    pRobots->printClean(rname);
             }
         }
         else if (currentCommand == "Place") // TODO implement in RobotDB.h
@@ -101,6 +102,7 @@ void Interface::CommandRoutine()
             Coordinate rCoord(coordX, coordY);
             iMap->addPath(rCoord);
         }
+        pRobots->printMap();
         cin >> currentCommand;
     }
 }

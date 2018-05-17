@@ -6,9 +6,9 @@
 
 Coordinate RobotDB::getRobotCoords(string &rname)
 {
-    for (RobotVec_it it = robots.begin(); it != robots.end(); it++)
-        if ((*it)->getName() == rname)
-            return (*it)->getCoordinate();
+    for (RobotVec_cit cit = robots.begin(); cit != robots.end(); cit++)
+        if ((*cit)->getName() == rname)
+            return (*cit)->getCoordinate();
 }
 
 int RobotDB::getRobotIndex(const string &rname) {
@@ -20,8 +20,8 @@ int RobotDB::getRobotIndex(const string &rname) {
 }
 
 bool RobotDB::ExistsInCoord(Coordinate &coord) {
-    for (RobotVec_it it = robots.begin(); it != robots.end() ; it++)
-        if ((*it)->getCoordinate() == coord)
+    for (RobotVec_cit cit = robots.begin(); cit != robots.end() ; cit++)
+        if ((*cit)->getCoordinate() == coord)
             return true;
     return false;
 }
@@ -31,13 +31,13 @@ bool RobotDB::MoveRobot(string rname, string direction) { // TODO add database r
     if(robotIndex != -1){ // if robot exists
         Robot* currRobot = robots[robotIndex];
         Coordinate newCoords = currRobot->dirToCoord(direction);
-        cell_status cellStatus = map->getCellStatus(newCoords);
-        if (cellStatus != WALL){
-            if(!map->inMapLimit(currRobot->getCoordinate())) // if robot moves to out of bounds
+        cell_type cellStatus = map->getCellStatus(newCoords);
+        if (cellStatus != WALL || !map->inMapLimit(newCoords)){
+            if(!map->inMapLimit(newCoords)) // if robot moves to out of bounds
                 currRobot->setCoordinate(Coordinate(-1,-1)); // place in -1,-1
             else currRobot->setCoordinate(newCoords); // otherwise, place in new coords
-            return true;
         }
+        return true;
     }
     else return false;
 }
@@ -96,7 +96,7 @@ connection_e RobotDB::robotCommunicable(string &rname) {
     else return NON_COMMUNICABLE;
 }
 
-void RobotDB::CleanRobot(string &rname) {
+bool RobotDB::CleanRobot(string &rname) {
     int robotIndex = getRobotIndex(rname);
     if(robotIndex != -1){
         Robot* currRobot = robots[robotIndex];
@@ -105,14 +105,17 @@ void RobotDB::CleanRobot(string &rname) {
         {
             currRobot->setCoordinate(Coordinate(0,0));
             currRobot->zeroDust_bin();
-            return;
+            return false;
         }
-        currRobot->incDust_bin();
-        cell_status currentCellStatus = map->getCellStatus(currCoordinate);
+        cell_type currentCellStatus = map->getCellStatus(currCoordinate);
         map->cleanDirt(currCoordinate);
-        if (currentCellStatus > map->getCellStatus(currCoordinate))
+        if (currentCellStatus > map->getCellStatus(currCoordinate)) {
             currRobot->incScore();
+            currRobot->incDust_bin();
+            return true;
+        }
     }
+    return false;
 }
 
 RobotDB::~RobotDB() {

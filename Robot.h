@@ -27,7 +27,7 @@ private:
 public:
     // #################### Class methods ####################
 
-    Robot(const Coordinate &coordinate, const string &name) : coordinate(coordinate), name(name), connection(COMMUNICABLE) {}
+    Robot(const Coordinate &coordinate, const string &name) : coordinate(coordinate), name(name), connection(COMMUNICABLE), dust_bin(0) {}
 
     ~Robot(){};
 
