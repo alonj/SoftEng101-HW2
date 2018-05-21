@@ -98,7 +98,6 @@ CellType Map::getCellStatus(const Coordinate &coord)
     if (cellValue == 0) return PATH;
     else if (cellValue == 1) return WALL;
     else if (cellValue == 2) return DIRT;
-    else return NULL;
 }
 
 int Map::getMap_h() const

@@ -94,7 +94,6 @@ Coordinate RobotDB::directionToCoords(const string &rname, const string &directi
     {
         return _robots[robotIndex]->directionToCoord(direction);
     }
-    else return NULL;
 }
 
 connection_e RobotDB::robotCommunicable(const string &rname) const

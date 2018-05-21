@@ -106,7 +106,7 @@ void Interface::CommandRoutine()
             Coordinate rCoord(coordX, coordY);
             _interfaceMap->addPath(rCoord);
         }
-        _pRobots->printMap();
+//        _pRobots->printMap(); // uncomment for debugging
         cin >> currentCommand;
     }
 }
