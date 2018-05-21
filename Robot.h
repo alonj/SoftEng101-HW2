@@ -82,16 +82,36 @@ public:
             connection = NON_COMMUNICABLE;
     }
 
+    /**
+     * getter function for "connection" attribute
+     * @return : value of connection (COMMUNICABLE / NON_COMMUNICABLE)
+     */
+
     inline connection_e getConnection() const {
         return connection;
     }
 
+    /**
+     * getter function for dust bin attribute
+     * @return : value of dust_bin (0 to 5)
+     */
     inline int getDustBin() const {
         return dust_bin;
     }
 
+    /**
+     * increment function for dust_bin attribute
+     */
     inline void incDustBin() { dust_bin++; }
+
+    /**
+     * zeroing function for dust_bin attribute
+     */
     inline void zeroDustBin() { dust_bin = 0; }
+
+    /**
+     * increment function for score attribute
+     */
     inline void incScore() { score++; }
 };
 

@@ -30,6 +30,11 @@ public:
      * @param map: Map object representing the map
      */
     void StartControl(Map* map);
+
+    /**
+     * function to iterate over command inputs and pass it through to robotDB/map methods.
+     * called from StartControl.
+     */
     void CommandRoutine();
 };
 
