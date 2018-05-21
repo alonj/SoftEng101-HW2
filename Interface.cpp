@@ -20,25 +20,25 @@ void Interface::CommandRoutine()
             cin >> rname;
             cin >> direction;
             if(pRobots->robotCommunicable(rname) == COMMUNICABLE)
-                if(pRobots->MoveRobot(rname, direction)) // if move successful,
+                if(pRobots->moveRobot(rname, direction)) // if move successful,
                     pRobots->printLocation(rname); // print new location
         }
         else if (currentCommand == "MoveMulti") // TODO implement in RobotDB.h
         {
             string nextDirection;
-            queue<string> dirQueue;
+            queue<string> instructionQueue;
             cin >> rname;
             cin >> nextDirection;
             while (nextDirection != "end") // save set on instructions into vector.
             {
-                dirQueue.push(nextDirection);
+                instructionQueue.push(nextDirection);
                 cin >> nextDirection;
             }
-            while(!dirQueue.empty()){
+            while(!instructionQueue.empty()){
                 if(pRobots->robotCommunicable(rname) == COMMUNICABLE)
-                    if(pRobots->MoveRobot(rname, dirQueue.front())) // Move robot per instructions and print only after "end" instruction received.
+                    if(pRobots->moveRobot(rname, instructionQueue.front())) // Move robot per instructions and print only after "end" instruction received.
                         pRobots->printLocation(rname);
-                dirQueue.pop();
+                instructionQueue.pop();
             }
         }
         else if (currentCommand == "MoveBuild") // TODO implement in RobotDB.h
@@ -47,9 +47,9 @@ void Interface::CommandRoutine()
             cin >> direction;
             if(pRobots->robotCommunicable(rname) == COMMUNICABLE){
                 Coordinate rCoord = pRobots->directionToCoords(rname, direction);
-                if(iMap->getCellStatus(rCoord) == WALL)
-                    iMap->addPath(rCoord);
-                if(pRobots->MoveRobot(rname, direction))
+                if(interfaceMap->getCellStatus(rCoord) == WALL)
+                    interfaceMap->addPath(rCoord);
+                if(pRobots->moveRobot(rname, direction))
                     pRobots->printLocation(rname);
 
             }
@@ -59,7 +59,7 @@ void Interface::CommandRoutine()
         {
             cin >> rname;
             if(pRobots->robotCommunicable(rname) == COMMUNICABLE){
-                if(pRobots->CleanRobot(rname))
+                if(pRobots->cleanRobot(rname))
                     pRobots->printClean(rname);
             }
         }
@@ -69,38 +69,38 @@ void Interface::CommandRoutine()
             cin >> coordX;
             cin >> coordY;
             Coordinate rCoord(coordX, coordY);
-            if (pRobots->PlaceRobot(rname, rCoord))
+            if (pRobots->placeRobot(rname, rCoord))
                 pRobots->printLocation(rname);
         }
         else if (currentCommand == "Delete") // TODO implement in RobotDB.h
         {
             cin >> rname;
-            pRobots->DeleteRobot(rname);
+            pRobots->deleteRobot(rname);
         }
         else if (currentCommand == "AddDirt") // TODO implement in Map.h
         {
             cin >> coordX;
             cin >> coordY;
             Coordinate rCoord(coordX, coordY);
-            if(!pRobots->ExistsInCoord(rCoord)
-               && iMap->inMapLimit(rCoord)
-               && iMap->getCellStatus(rCoord) != WALL)
-                iMap->addDirt(rCoord);
+            if(!pRobots->existsInCoord(rCoord)
+               && interfaceMap->inMapLimit(rCoord)
+               && interfaceMap->getCellStatus(rCoord) != WALL)
+                interfaceMap->addDirt(rCoord);
         }
         else if (currentCommand == "AddWall") // TODO implement in Map.h
         {
             cin >> coordX;
             cin >> coordY;
             Coordinate rCoord(coordX, coordY);
-            if(!pRobots->ExistsInCoord(rCoord))
-                iMap->addWall(rCoord);
+            if(!pRobots->existsInCoord(rCoord))
+                interfaceMap->addWall(rCoord);
         }
         else if (currentCommand == "AddPath") // TODO implement in Map.h
         {
             cin >> coordX;
             cin >> coordY;
             Coordinate rCoord(coordX, coordY);
-            iMap->addPath(rCoord);
+            interfaceMap->addPath(rCoord);
         }
         pRobots->printMap();
         cin >> currentCommand;
@@ -109,7 +109,7 @@ void Interface::CommandRoutine()
 
 void Interface::StartControl(Map* map)
 {
-    iMap = map;
+    interfaceMap = map;
     cout << "Start entering commands:" << endl;
     CommandRoutine();
 //    PrintTable(robotName, robotScore, robotBinStatus);

@@ -54,7 +54,7 @@ public:
      * function changes robot's coordinate in the direction passed to method.
      * @param direction : Direction in which robot will move.
      */
-    Coordinate dirToCoord(string &direction);
+    Coordinate directionToCoord(const string &direction) const;
 
     /**
      * function returns robot's name
@@ -77,8 +77,7 @@ public:
      * @param coordinate : new robot's coordinate
      */
     inline void setCoordinate(const Coordinate &coordinate) {
-        Coordinate newCoord(coordinate);
-        Robot::coordinate = newCoord;
+        Robot::coordinate = coordinate;
         if(coordinate.outOfBounds())
             connection = NON_COMMUNICABLE;
     }
@@ -87,16 +86,12 @@ public:
         return connection;
     }
 
-    inline int getDust_bin() const {
+    inline int getDustBin() const {
         return dust_bin;
     }
 
-    inline int getScore() const {
-        return score;
-    }
-
-    inline void incDust_bin() { dust_bin++; }
-    inline void zeroDust_bin() { dust_bin = 0; }
+    inline void incDustBin() { dust_bin++; }
+    inline void zeroDustBin() { dust_bin = 0; }
     inline void incScore() { score++; }
 };
 

@@ -4,11 +4,10 @@
 
 #include "Robot.h"
 
-Coordinate Robot::dirToCoord(string &direction) {
+Coordinate Robot::directionToCoord(const string &direction) const {
     Coordinate result = coordinate;
     int currX = coordinate.getX();
     int currY = coordinate.getY();
-    int newX(currX), newY(currY);
     if (direction == "U" || direction == "UL" || direction == "UR")
         result.setX(--currX);
     if (direction == "D" || direction == "DL" || direction == "DR")

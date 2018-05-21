@@ -18,40 +18,92 @@ class RobotDB {
 private:
     RobotVec robots;
     Map* map;
-    Coordinate getRobotCoords(string &rname);
-    int getRobotIndex(const string &rname);
+    /**
+     * function returns index of specified robot name in the robot vector "robots" of
+     * current object
+     * @param rname : name of the specified robot
+     * @return integer index in vector
+     */
+    const int getRobotIndex(const string &rname) const;
 public:
-    explicit RobotDB(Map *new_map){  map = new_map; };
+    explicit RobotDB(Map *newMap){  map = newMap; };
     ~RobotDB();
-    void DeleteRobot(const std::string& rname);
-    bool PlaceRobot(string rname, Coordinate coordinate);
-    bool MoveRobot(string rname, string direction);
-    bool ExistsInCoord(Coordinate &coord);
-    bool CleanRobot(string &rname);
-    void printClean(string &rname);
-    void printLocation(string &rname);
-    Coordinate directionToCoords(string &rname, string &dir);
-    connection_e robotCommunicable(string &rname);
-    inline void printMap(){
-        cout<<"Current Map Status:"<<endl<<' ';
-        for(int i = 0; i < map->getMap_w(); i++) cout<<'-';
-        cout<<endl;
-        for(int i = 0; i < map->getMap_h(); i++){
-            cout << '|';
-            for(int j = 0; j < map->getMap_w() ; j++){
-                Coordinate currCoord(i,j);
-                if(ExistsInCoord(currCoord) && map->getCellStatus(currCoord) == DIRT) cout<<'D';
-                else if(ExistsInCoord(currCoord)) cout<<'C';
-                else if(map->getCellStatus(currCoord) == DIRT) cout << 'o';
-                else if (map->getCellStatus(currCoord) == WALL) cout << '#';
-                else if (map->getCellStatus(currCoord) == PATH) cout << ' ';
-            }
-            cout<<'|'<<endl;
-        }
-        cout<<' ';
-        for(int i = 0; i < map->getMap_w(); i++) cout<<'-';
-        cout<<endl;
-    }
+
+    /**
+     * function removes specified robot from the robot vector "robots"
+     * @param rname : name of the specified robot
+     */
+    void deleteRobot(const string &rname);
+
+    /**
+     * function places specified robot (moves robot if exists, new robot if not)
+     * in specified coordinate
+     * @param rname : name of specified robot
+     * @param coordinate : coordinate to place robot in
+     * @return true if placement coordinates are valid
+     */
+    bool placeRobot(const string &rname, Coordinate &coordinate);
+
+    /**
+     * function moves robot one cell in the specified direction
+     * @param rname : name of specified robot
+     * @param direction : direction to move in (u, l, r, d or any combination thereof)
+     * @return : true if robot name is valid (exists)
+     */
+    bool moveRobot(const string &rname, const string &direction);
+
+    /**
+     * function checks if a robot exists in specified coordinates
+     * @param coord : specified coordinates
+     * @return : true if exists
+     */
+    const bool existsInCoord(const Coordinate &coord) const;
+
+    /**
+     * function cleans cell in the coordinates of the specified robot (i.e:
+     * turns cell value to 0 (PATH))
+     * @param rname : name of the specified robot
+     * @return : true if robot exists AND dust bin not full (value < 5)
+     */
+    bool cleanRobot(const string &rname);
+
+    /**
+     * function prints "clean" message with the specified robot name and coordinates
+     * @param rname : name of specified robot
+     */
+    void printClean(const string &rname) const;
+
+    /**
+     * function prints "location" message with the specified robot name and coordinates
+     * @param rname : name of specified robot
+     */
+    void printLocation(const string &rname) const;
+
+    /**
+     * function converts a given direction from a robot, into a coordinate object
+     * for example, robot coordinates = (2,2), given direction R, return is (2,3)
+     * @param rname : name of specified robot which coordinates serve as starting point
+     * @param direction : direction to move from known coordinates
+     * @return : coordinate object of the given direction from the robot
+     */
+    Coordinate directionToCoords(const string &rname, const string &direction);
+
+    /**
+     * function returns communicability status of specified robot
+     * @param rname : name of specified robot
+     * @return : value of robot's "connection" attribute, if robot exists
+     */
+    connection_e robotCommunicable(const string &rname) const;
+
+    /**
+     * function prints entire map's status.
+     * " " for path (C if also exists robot in coordinates)
+     * "o" for dirt (D if also exists robot in coordinates)
+     * "#" for wall.
+     *
+     * used for debugging
+     */
+    inline void printMap() const;
 };
 
 

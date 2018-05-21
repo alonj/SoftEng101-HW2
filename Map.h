@@ -22,8 +22,8 @@ typedef enum{PATH = 0, WALL = 1, DIRT = 2} cell_type;
 class Map {
 private:
     grid_type gmap;
-    int map_h;
-    int map_w;
+    int mapHeight;
+    int mapWidth;
 public:
 /** Constructor defaults to gmap as outlined in the HW instructions
  * map width/height default to S_WIDTH, S_HIGH (respectively)
@@ -37,8 +37,8 @@ public:
         gmap[4] = new size_type[S_WIDTH]{ 1 , 1 , 1 , 2 , 1 , 0 , 1};
         gmap[5] = new size_type[S_WIDTH]{ 1 , 0 , 0 , 0 , 0 , 2 , 1};
         gmap[6] = new size_type[S_WIDTH]{ 1 , 0 , 1 , 1 , 1 , 1 , 1};
-        map_h = S_HIGH;
-        map_w = S_WIDTH;};
+        mapHeight = S_HIGH;
+        mapWidth = S_WIDTH;};
 
 /** Add a wall to the map in the given coordinate
  * @param coord : given coordinate

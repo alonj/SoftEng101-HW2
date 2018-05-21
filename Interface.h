@@ -17,7 +17,7 @@ private:
     RobotDB* pRobots;
     const Interface& operator=(const Interface& Robs_control); //Assignment operator
     Interface(const Interface& Robs_control); //Copy constructor
-    Map* iMap;
+    Map* interfaceMap;
 public:
     //Constructors
     Interface(RobotDB* pNew_Robots): pRobots(pNew_Robots){}

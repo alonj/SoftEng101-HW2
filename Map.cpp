@@ -13,23 +13,23 @@ using namespace std;
 
 void Map::addDirt(const Coordinate& coord){
     if (inMapLimit(coord))
-        gmap[coord.getX()][coord.getY()] = 2;
+        gmap[coord.getX()][coord.getY()] = DIRT;
 }
 
 void Map::cleanDirt(const Coordinate& coord)
 {
     if (inMapLimit(coord))
-        gmap[coord.getX()*map_w + coord.getY()] = 0;
+        gmap[coord.getX()][coord.getY()] = PATH;
 }
 
 void Map::addWall(const Coordinate &coord) {
     int x = coord.getX();
     int y = coord.getY();
     if (inMapLimit(coord))
-        gmap[x][y] = 1;
+        gmap[x][y] = WALL;
     else if(x >=0 && y >= 0){
-        int newHeight = map_h + std::max((x-map_h),0);
-        int newWidth = map_w + std::max((y-map_w),0);
+        int newHeight = mapHeight + max((x-mapHeight),0);
+        int newWidth = mapWidth + max((y-mapWidth),0);
         increaseMapDimension(newHeight, newWidth);
     }
 }
@@ -41,11 +41,11 @@ void Map::addPath(const Coordinate &coord) {
         if (getCellStatus(coord) != WALL) // don't do anything if cell is not a wall
             return;
         else
-            gmap[x*map_w + y]=0;
+            gmap[x][y]=PATH;
     }
     else if(x >= 0 && y >= 0){
-        int newHeight = map_h + std::max((x+1-map_h),0);
-        int newWidth = map_w + std::max((y+1-map_w),0);
+        int newHeight = mapHeight + max((x+1-mapHeight),0);
+        int newWidth = mapWidth + max((y+1-mapWidth),0);
         increaseMapDimension(newHeight, newWidth);
         gmap[x][y] = PATH;
     }
@@ -55,17 +55,17 @@ bool Map::inMapLimit(const Coordinate &coord)
 {
     int x = coord.getX();
     int y = coord.getY();
-    return x >= 0 && x < map_h && y >= 0 && y < map_w;
+    return x >= 0 && x < mapHeight && y >= 0 && y < mapWidth;
 }
 
 void Map::increaseMapDimension(int newHeight, int newWidth) {
-    if(newHeight > map_h) // if height changes, allocate more rows
+    if(newHeight > mapHeight) // if height changes, allocate more rows
         gmap = static_cast<grid_type>(realloc(gmap, newHeight * sizeof(size_type*)));
     for(int i = 0; i < newHeight; i++) {
-        if(i < map_h){ // in "old" rows,
-            if(newWidth > map_w){ // if width changes, allocate more columns
+        if(i < mapHeight){ // in "old" rows,
+            if(newWidth > mapWidth){ // if width changes, allocate more columns
                 gmap[i] = static_cast<int *>(realloc(gmap[i], newWidth * sizeof(size_type)));
-                for(int j = map_w; j < newWidth; j++) // populate new columns with walls
+                for(int j = mapWidth; j < newWidth; j++) // populate new columns with walls
                     gmap[i][j] = WALL;
             }
         }
@@ -75,25 +75,25 @@ void Map::increaseMapDimension(int newHeight, int newWidth) {
                 gmap[i][j] = WALL;
         }
     }
-    map_h = newHeight; // update height, width attributes
-    map_w = newWidth;
+    mapHeight = newHeight; // update height, width attributes
+    mapWidth = newWidth;
 }
 
 cell_type Map::getCellStatus(const Coordinate &coord) {
     int x = coord.getX();
     int y = coord.getY();
-    int numeric_status = gmap[x][y];
-    if(numeric_status == 0) return PATH;
-    else if (numeric_status == 1) return WALL;
-    else if (numeric_status == 2) return DIRT;
+    int cellValue = gmap[x][y];
+    if(cellValue == 0) return PATH;
+    else if (cellValue == 1) return WALL;
+    else if (cellValue == 2) return DIRT;
 }
 
 int Map::getMap_h() const {
-    return map_h;
+    return mapHeight;
 }
 
 int Map::getMap_w() const {
-    return map_w;
+    return mapWidth;
 }
 
 //########################################################################################
