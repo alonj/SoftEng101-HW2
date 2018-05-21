@@ -17,7 +17,7 @@ using std::string;
 
 typedef int size_type;
 typedef int** grid_type;
-typedef enum{PATH = 0, WALL = 1, DIRT = 2} cell_type;
+typedef enum{PATH = 0, WALL = 1, DIRT = 2} CellType;
 
 class Map {
 private:
@@ -73,7 +73,7 @@ public:
  * @param coord : coordinate to return status of.
  * @return : 0 if the cell is clean, 1 if wall, 2 if dirty.
  */
-    cell_type getCellStatus(const Coordinate &coord);
+    CellType getCellStatus(const Coordinate &coord);
 
 /**
  * Function copies the map into a map with dimensions set by newHeight, newWidth, and replaces the old one.

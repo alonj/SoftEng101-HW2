@@ -24,7 +24,7 @@ bool RobotDB::moveRobot(const string &rname, const string &direction) { // TODO 
     if (robotIndex != -1) { // if robot exists
         Robot *currRobot = robots[robotIndex];
         Coordinate newCoords = currRobot->directionToCoord(direction);
-        cell_type cellStatus = map->getCellStatus(newCoords);
+        CellType cellStatus = map->getCellStatus(newCoords);
         if (cellStatus != WALL || !map->inMapLimit(newCoords)) {
             if (!map->inMapLimit(newCoords)) // if robot moves to out of bounds
                 currRobot->setCoordinate(Coordinate(-1, -1)); // place in -1,-1
@@ -96,7 +96,7 @@ bool RobotDB::cleanRobot(const string &rname) {
             currRobot->zeroDustBin();
             return false;
         }
-        cell_type currentCellStatus = map->getCellStatus(currCoordinate);
+        CellType currentCellStatus = map->getCellStatus(currCoordinate);
         map->cleanDirt(currCoordinate);
         if (currentCellStatus > map->getCellStatus(currCoordinate)) {
             currRobot->incScore();

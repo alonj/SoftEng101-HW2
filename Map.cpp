@@ -79,7 +79,7 @@ void Map::increaseMapDimension(int newHeight, int newWidth) {
     mapWidth = newWidth;
 }
 
-cell_type Map::getCellStatus(const Coordinate &coord) {
+CellType Map::getCellStatus(const Coordinate &coord) {
     int x = coord.getX();
     int y = coord.getY();
     int cellValue = gmap[x][y];
