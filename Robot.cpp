@@ -4,7 +4,8 @@
 
 #include "Robot.h"
 
-Coordinate Robot::directionToCoord(const string &direction) const {
+Coordinate Robot::directionToCoord(const string &direction) const
+{
     Coordinate result = _coordinate;
     int currX = _coordinate.getX();
     int currY = _coordinate.getY();

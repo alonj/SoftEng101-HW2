@@ -14,22 +14,23 @@
 class Interface
 {
 private:
-    RobotDB* _pRobots;
-    const Interface& operator=(const Interface& Robs_control); //Assignment operator
-    Interface(const Interface& Robs_control); //Copy constructor
-    Map* _interfaceMap;
+    RobotDB *_pRobots;
+
+    const Interface &operator=(const Interface &Robs_control); //Assignment operator
+    Interface(const Interface &Robs_control); //Copy constructor
+    Map *_interfaceMap;
 public:
     //Constructors
-    Interface(RobotDB* pNew_Robots): _pRobots(pNew_Robots){}
-    
+    Interface(RobotDB *pNew_Robots) : _pRobots(pNew_Robots){}
+
     //Destructor
     ~Interface(){}
-    
+
     /**
      * function that gets input from the user and calls the suitable function accordingly
      * @param map: Map object representing the map
      */
-    void StartControl(Map* map);
+    void StartControl(Map *map);
 
     /**
      * function to iterate over command inputs and pass it through to robotDB/map methods.

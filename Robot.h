@@ -9,7 +9,10 @@
 
 using namespace std;
 
-typedef enum{COMMUNICABLE = 0, NON_COMMUNICABLE = 1} connection_e;
+typedef enum
+{
+    COMMUNICABLE = 0, NON_COMMUNICABLE = 1
+} connection_e;
 
 /**
  * Robot class role is to hold all the data and operations (function) of a single robot.
@@ -27,7 +30,8 @@ private:
 public:
     // #################### Class methods ####################
 
-    Robot(const Coordinate &coordinate, const string &name) : _coordinate(coordinate), _name(name), _connection(COMMUNICABLE), _dust_bin(0) {}
+    Robot(const Coordinate &coordinate, const string &name) : _coordinate(coordinate), _name(name),
+                                                              _connection(COMMUNICABLE), _dust_bin(0) {}
 
     ~Robot(){};
 
@@ -60,7 +64,8 @@ public:
      * function returns robot's name
      * @return string of robot name
      */
-    inline const string &getName() const {
+    inline const string &getName() const
+    {
         return _name;
     }
 
@@ -68,7 +73,8 @@ public:
      * function returns robot's coordinate
      * @return object of Coordinate type
      */
-    inline Coordinate getCoordinate() const {
+    inline Coordinate getCoordinate() const
+    {
         return _coordinate;
     }
 
@@ -76,9 +82,10 @@ public:
      * functions sets robot's coordinate; if new coordinate is negative, sets connection status to NON_COMMUNICABLE.
      * @param coordinate : new robot's coordinate
      */
-    inline void setCoordinate(const Coordinate &coordinate) {
+    inline void setCoordinate(const Coordinate &coordinate)
+    {
         Robot::_coordinate = coordinate;
-        if(coordinate.outOfBounds())
+        if (coordinate.outOfBounds())
             _connection = NON_COMMUNICABLE;
     }
 
@@ -87,7 +94,8 @@ public:
      * @return : value of connection (COMMUNICABLE / NON_COMMUNICABLE)
      */
 
-    inline connection_e getConnection() const {
+    inline connection_e getConnection() const
+    {
         return _connection;
     }
 
@@ -95,24 +103,34 @@ public:
      * getter function for dust bin attribute
      * @return : value of dust_bin (0 to 5)
      */
-    inline int getDustBin() const {
+    inline int getDustBin() const
+    {
         return _dust_bin;
     }
 
     /**
      * increment function for dust_bin attribute
      */
-    inline void incDustBin() { _dust_bin++; }
+    inline void incDustBin()
+    {
+        _dust_bin++;
+    }
 
     /**
      * zeroing function for dust_bin attribute
      */
-    inline void zeroDustBin() { _dust_bin = 0; }
+    inline void zeroDustBin()
+    {
+        _dust_bin = 0;
+    }
 
     /**
      * increment function for score attribute
      */
-    inline void incScore() { _score++; }
+    inline void incScore()
+    {
+        _score++;
+    }
 };
 
 #endif

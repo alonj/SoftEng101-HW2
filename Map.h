@@ -16,10 +16,11 @@
 using std::string;
 
 typedef int size_type;
-typedef int** grid_type;
-typedef enum{PATH = 0, WALL = 1, DIRT = 2} CellType;
+typedef int **grid_type;
+typedef enum {PATH = 0, WALL = 1, DIRT = 2} CellType;
 
-class Map {
+class Map
+{
 private:
     grid_type _gmap;
     int _mapHeight;
@@ -28,38 +29,40 @@ public:
 /** Constructor defaults to gmap as outlined in the HW instructions
  * map width/height default to S_WIDTH, S_HIGH (respectively)
  */
-    Map(){
-        _gmap = new size_type*[S_HIGH];
-        _gmap[0] = new size_type[S_WIDTH]{ 0 , 1 , 1 , 1 , 1 , 1 , 1};
-        _gmap[1] = new size_type[S_WIDTH]{ 1 , 2 , 2 , 0 , 1 , 0 , 1};
-        _gmap[2] = new size_type[S_WIDTH]{ 0 , 0 , 1 , 1 , 1 , 2 , 1};
-        _gmap[3] = new size_type[S_WIDTH]{ 1 , 0 , 0 , 0 , 0 , 0 , 1};
-        _gmap[4] = new size_type[S_WIDTH]{ 1 , 1 , 1 , 2 , 1 , 0 , 1};
-        _gmap[5] = new size_type[S_WIDTH]{ 1 , 0 , 0 , 0 , 0 , 2 , 1};
-        _gmap[6] = new size_type[S_WIDTH]{ 1 , 0 , 1 , 1 , 1 , 1 , 1};
+    Map()
+    {
+        _gmap = new size_type *[S_HIGH];
+        _gmap[0] = new size_type[S_WIDTH]{0, 1, 1, 1, 1, 1, 1};
+        _gmap[1] = new size_type[S_WIDTH]{1, 2, 2, 0, 1, 0, 1};
+        _gmap[2] = new size_type[S_WIDTH]{0, 0, 1, 1, 1, 2, 1};
+        _gmap[3] = new size_type[S_WIDTH]{1, 0, 0, 0, 0, 0, 1};
+        _gmap[4] = new size_type[S_WIDTH]{1, 1, 1, 2, 1, 0, 1};
+        _gmap[5] = new size_type[S_WIDTH]{1, 0, 0, 0, 0, 2, 1};
+        _gmap[6] = new size_type[S_WIDTH]{1, 0, 1, 1, 1, 1, 1};
         _mapHeight = S_HIGH;
-        _mapWidth = S_WIDTH;};
+        _mapWidth = S_WIDTH;
+    };
 
 /** Add a wall to the map in the given coordinate
  * @param coord : given coordinate
  */
-    void addWall(const Coordinate& coord);
+    void addWall(const Coordinate &coord);
 
     /** Add a clean path to the map in the given coordinate. if coordinate > 0,0 and outside map, increases map size
  * @param coord : given coordinate
  */
-    void addPath(const Coordinate& coord);
+    void addPath(const Coordinate &coord);
 
 /** Add a dirt to the map, meaning place 1 at x,y location. if coordinate > 0,0 and outside map, increases map size
  * @param coord: coordinate to add wall in
  */
-    void addDirt(const Coordinate& coord);
+    void addDirt(const Coordinate &coord);
 
 /**
  * Clean dirt in the specified coordinates (i.e change value of cell to 0)
  * @param coord : coordinate to clean dirt in
  */
-    void cleanDirt(const Coordinate& coord);
+    void cleanDirt(const Coordinate &coord);
 
 /**
  * Check if x,y coordinates are valid. valid - if the coordinates in the map is in the map limits.

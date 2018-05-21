@@ -9,22 +9,22 @@ class Coordinate
 private:
     int _x;
     int _y;
-    
+
 public:
     //Constructors
-    Coordinate(int new_x, int new_y): _x(new_x), _y(new_y) { } //Default constructor
-    Coordinate(const Coordinate& new_coordinate): _x(new_coordinate._x), _y(new_coordinate._y) { } // Copy constructor
+    Coordinate(int new_x, int new_y) : _x(new_x), _y(new_y){} //Default constructor
+    Coordinate(const Coordinate &new_coordinate) : _x(new_coordinate._x), _y(new_coordinate._y){} // Copy constructor
 
     //Destructor
     ~Coordinate(){}
-    
+
     //Member functions
     /**
      * function prints out coordinate attributes (x, y values)
      */
     inline void print()
-    {  
-           std::cout << " at: " << _x << "," << _y << std::endl;
+    {
+        std::cout << " at: " << _x << "," << _y << std::endl;
     };
 
     /**
@@ -32,7 +32,8 @@ public:
      * @param rhs : other coordinate.
      * @return : true if equal
      */
-    bool operator==(const Coordinate &rhs) const {
+    bool operator==(const Coordinate &rhs) const
+    {
         return _x == rhs._x &&
                _y == rhs._y;
     }
@@ -42,7 +43,8 @@ public:
      * @param rhs : other coordinate.
      * @return : true if equality is false
      */
-    bool operator!=(const Coordinate &rhs) const {
+    bool operator!=(const Coordinate &rhs) const
+    {
         return !(rhs == *this);
     }
 
@@ -50,7 +52,8 @@ public:
      * getter function for x attribute
      * @return : value of x
      */
-    inline int getX() const {
+    inline int getX() const
+    {
         return _x;
     }
 
@@ -58,7 +61,8 @@ public:
      * getter function for y attribute
      * @return : value of y
      */
-    inline int getY() const {
+    inline int getY() const
+    {
         return _y;
     }
 
@@ -66,7 +70,8 @@ public:
      * setter function for x attribute
      * @param x : new x value
      */
-    inline void setX(int x) {
+    inline void setX(int x)
+    {
         Coordinate::_x = x;
     }
 
@@ -74,7 +79,8 @@ public:
      * setter function for y attribute
      * @param y : new y value
      */
-    inline void setY(int y) {
+    inline void setY(int y)
+    {
         Coordinate::_y = y;
     }
 
@@ -82,10 +88,11 @@ public:
      * checks if coordinate is absolutely negative (x AND y are negative)
      * @return : true if coordinate is negative
      */
-    inline bool outOfBounds() const {
-        return _x<0 && _y<0;
+    inline bool outOfBounds() const
+    {
+        return _x < 0 && _y < 0;
     }
 
-};   
+};
 
 #endif 

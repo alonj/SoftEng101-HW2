@@ -10,14 +10,16 @@
 #include "Robot.h"
 #include "Map.h"
 
-typedef std::vector<Robot*> RobotVec;
-typedef std::vector<Robot*>::iterator RobotVec_it;
-typedef std::vector<Robot*>::const_iterator RobotVec_cit;
+typedef std::vector<Robot *> RobotVec;
+typedef std::vector<Robot *>::iterator RobotVec_it;
+typedef std::vector<Robot *>::const_iterator RobotVec_cit;
 
-class RobotDB {
+class RobotDB
+{
 private:
     RobotVec _robots;
-    Map* _map;
+    Map *_map;
+
     /**
      * function returns index of specified robot name in the robot vector "robots" of
      * current object
@@ -25,8 +27,13 @@ private:
      * @return integer index in vector
      */
     const int getRobotIndex(const string &rname) const;
+
 public:
-    explicit RobotDB(Map *newMap){  _map = newMap; };
+    explicit RobotDB(Map *newMap)
+    {
+        _map = newMap;
+    };
+
     ~RobotDB();
 
     /**
