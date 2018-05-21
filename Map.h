@@ -21,24 +21,24 @@ typedef enum{PATH = 0, WALL = 1, DIRT = 2} CellType;
 
 class Map {
 private:
-    grid_type gmap;
-    int mapHeight;
-    int mapWidth;
+    grid_type _gmap;
+    int _mapHeight;
+    int _mapWidth;
 public:
 /** Constructor defaults to gmap as outlined in the HW instructions
  * map width/height default to S_WIDTH, S_HIGH (respectively)
  */
     Map(){
-        gmap = new size_type*[S_HIGH];
-        gmap[0] = new size_type[S_WIDTH]{ 0 , 1 , 1 , 1 , 1 , 1 , 1};
-        gmap[1] = new size_type[S_WIDTH]{ 1 , 2 , 2 , 0 , 1 , 0 , 1};
-        gmap[2] = new size_type[S_WIDTH]{ 0 , 0 , 1 , 1 , 1 , 2 , 1};
-        gmap[3] = new size_type[S_WIDTH]{ 1 , 0 , 0 , 0 , 0 , 0 , 1};
-        gmap[4] = new size_type[S_WIDTH]{ 1 , 1 , 1 , 2 , 1 , 0 , 1};
-        gmap[5] = new size_type[S_WIDTH]{ 1 , 0 , 0 , 0 , 0 , 2 , 1};
-        gmap[6] = new size_type[S_WIDTH]{ 1 , 0 , 1 , 1 , 1 , 1 , 1};
-        mapHeight = S_HIGH;
-        mapWidth = S_WIDTH;};
+        _gmap = new size_type*[S_HIGH];
+        _gmap[0] = new size_type[S_WIDTH]{ 0 , 1 , 1 , 1 , 1 , 1 , 1};
+        _gmap[1] = new size_type[S_WIDTH]{ 1 , 2 , 2 , 0 , 1 , 0 , 1};
+        _gmap[2] = new size_type[S_WIDTH]{ 0 , 0 , 1 , 1 , 1 , 2 , 1};
+        _gmap[3] = new size_type[S_WIDTH]{ 1 , 0 , 0 , 0 , 0 , 0 , 1};
+        _gmap[4] = new size_type[S_WIDTH]{ 1 , 1 , 1 , 2 , 1 , 0 , 1};
+        _gmap[5] = new size_type[S_WIDTH]{ 1 , 0 , 0 , 0 , 0 , 2 , 1};
+        _gmap[6] = new size_type[S_WIDTH]{ 1 , 0 , 1 , 1 , 1 , 1 , 1};
+        _mapHeight = S_HIGH;
+        _mapWidth = S_WIDTH;};
 
 /** Add a wall to the map in the given coordinate
  * @param coord : given coordinate

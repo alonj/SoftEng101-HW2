@@ -18,16 +18,16 @@ class Robot
 {
 
 private:
-    Coordinate coordinate;
-    const string name;
-    int dust_bin;
-    int score;
-    connection_e connection;
+    Coordinate _coordinate;
+    const string _name;
+    int _dust_bin;
+    int _score;
+    connection_e _connection;
 
 public:
     // #################### Class methods ####################
 
-    Robot(const Coordinate &coordinate, const string &name) : coordinate(coordinate), name(name), connection(COMMUNICABLE), dust_bin(0) {}
+    Robot(const Coordinate &coordinate, const string &name) : _coordinate(coordinate), _name(name), _connection(COMMUNICABLE), _dust_bin(0) {}
 
     ~Robot(){};
 
@@ -36,8 +36,8 @@ public:
      */
     inline void printLoc()
     {
-        cout << "Robot: " << this->name;
-        coordinate.print();
+        cout << "Robot: " << this->_name;
+        _coordinate.print();
     }
 
     /**
@@ -45,9 +45,9 @@ public:
      */
     inline void printClean()
     {
-        cout << "Robot: " << this->name << " is cleaning";
-        coordinate.print();
-        cout << "dust bin: " << dust_bin << endl;
+        cout << "Robot: " << this->_name << " is cleaning";
+        _coordinate.print();
+        cout << "dust bin: " << _dust_bin << endl;
     }
 
     /**
@@ -61,7 +61,7 @@ public:
      * @return string of robot name
      */
     inline const string &getName() const {
-        return name;
+        return _name;
     }
 
     /**
@@ -69,7 +69,7 @@ public:
      * @return object of Coordinate type
      */
     inline Coordinate getCoordinate() const {
-        return coordinate;
+        return _coordinate;
     }
 
     /**
@@ -77,9 +77,9 @@ public:
      * @param coordinate : new robot's coordinate
      */
     inline void setCoordinate(const Coordinate &coordinate) {
-        Robot::coordinate = coordinate;
+        Robot::_coordinate = coordinate;
         if(coordinate.outOfBounds())
-            connection = NON_COMMUNICABLE;
+            _connection = NON_COMMUNICABLE;
     }
 
     /**
@@ -88,7 +88,7 @@ public:
      */
 
     inline connection_e getConnection() const {
-        return connection;
+        return _connection;
     }
 
     /**
@@ -96,23 +96,23 @@ public:
      * @return : value of dust_bin (0 to 5)
      */
     inline int getDustBin() const {
-        return dust_bin;
+        return _dust_bin;
     }
 
     /**
      * increment function for dust_bin attribute
      */
-    inline void incDustBin() { dust_bin++; }
+    inline void incDustBin() { _dust_bin++; }
 
     /**
      * zeroing function for dust_bin attribute
      */
-    inline void zeroDustBin() { dust_bin = 0; }
+    inline void zeroDustBin() { _dust_bin = 0; }
 
     /**
      * increment function for score attribute
      */
-    inline void incScore() { score++; }
+    inline void incScore() { _score++; }
 };
 
 #endif

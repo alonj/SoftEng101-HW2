@@ -14,13 +14,13 @@
 class Interface
 {
 private:
-    RobotDB* pRobots;
+    RobotDB* _pRobots;
     const Interface& operator=(const Interface& Robs_control); //Assignment operator
     Interface(const Interface& Robs_control); //Copy constructor
-    Map* interfaceMap;
+    Map* _interfaceMap;
 public:
     //Constructors
-    Interface(RobotDB* pNew_Robots): pRobots(pNew_Robots){}
+    Interface(RobotDB* pNew_Robots): _pRobots(pNew_Robots){}
     
     //Destructor
     ~Interface(){}

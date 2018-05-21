@@ -16,8 +16,8 @@ typedef std::vector<Robot*>::const_iterator RobotVec_cit;
 
 class RobotDB {
 private:
-    RobotVec robots;
-    Map* map;
+    RobotVec _robots;
+    Map* _map;
     /**
      * function returns index of specified robot name in the robot vector "robots" of
      * current object
@@ -26,7 +26,7 @@ private:
      */
     const int getRobotIndex(const string &rname) const;
 public:
-    explicit RobotDB(Map *newMap){  map = newMap; };
+    explicit RobotDB(Map *newMap){  _map = newMap; };
     ~RobotDB();
 
     /**

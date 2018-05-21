@@ -24,7 +24,7 @@ public:
      */
     inline void print()
     {  
-           std::cout << " at: " << x << "," << y << std::endl;  
+           std::cout << " at: " << x << "," << y << std::endl;
     };
 
     /**
