@@ -7,13 +7,13 @@
 class Coordinate
 {
 private:
-    int x;
-    int y;
+    int _x;
+    int _y;
     
 public:
     //Constructors
-    Coordinate(int new_x, int new_y): x(new_x), y(new_y) { } //Default constructor
-    Coordinate(const Coordinate& new_coordinate): x(new_coordinate.x), y(new_coordinate.y) { } // Copy constructor
+    Coordinate(int new_x, int new_y): _x(new_x), _y(new_y) { } //Default constructor
+    Coordinate(const Coordinate& new_coordinate): _x(new_coordinate._x), _y(new_coordinate._y) { } // Copy constructor
 
     //Destructor
     ~Coordinate(){}
@@ -24,7 +24,7 @@ public:
      */
     inline void print()
     {  
-           std::cout << " at: " << x << "," << y << std::endl;
+           std::cout << " at: " << _x << "," << _y << std::endl;
     };
 
     /**
@@ -33,8 +33,8 @@ public:
      * @return : true if equal
      */
     bool operator==(const Coordinate &rhs) const {
-        return x == rhs.x &&
-               y == rhs.y;
+        return _x == rhs._x &&
+               _y == rhs._y;
     }
 
     /**
@@ -51,7 +51,7 @@ public:
      * @return : value of x
      */
     inline int getX() const {
-        return x;
+        return _x;
     }
 
     /**
@@ -59,7 +59,7 @@ public:
      * @return : value of y
      */
     inline int getY() const {
-        return y;
+        return _y;
     }
 
     /**
@@ -67,7 +67,7 @@ public:
      * @param x : new x value
      */
     inline void setX(int x) {
-        Coordinate::x = x;
+        Coordinate::_x = x;
     }
 
     /**
@@ -75,7 +75,7 @@ public:
      * @param y : new y value
      */
     inline void setY(int y) {
-        Coordinate::y = y;
+        Coordinate::_y = y;
     }
 
     /**
@@ -83,7 +83,7 @@ public:
      * @return : true if coordinate is negative
      */
     inline bool outOfBounds() const {
-        return x<0 && y<0;
+        return _x<0 && _y<0;
     }
 
 };   
