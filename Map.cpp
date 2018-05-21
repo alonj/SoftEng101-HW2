@@ -98,6 +98,7 @@ CellType Map::getCellStatus(const Coordinate &coord)
     if (cellValue == 0) return PATH;
     else if (cellValue == 1) return WALL;
     else if (cellValue == 2) return DIRT;
+    else return NULL;
 }
 
 int Map::getMap_h() const
@@ -108,6 +109,13 @@ int Map::getMap_h() const
 int Map::getMap_w() const
 {
     return _mapWidth;
+}
+
+Map::~Map()
+{
+    for(int i = 0; i < _mapHeight; i++)
+        delete _gmap[i];
+    delete _gmap;
 }
 
 //########################################################################################

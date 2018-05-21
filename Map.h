@@ -43,6 +43,8 @@ public:
         _mapWidth = S_WIDTH;
     };
 
+    virtual ~Map(); // destructor
+
 /** Add a wall to the map in the given coordinate
  * @param coord : given coordinate
  */

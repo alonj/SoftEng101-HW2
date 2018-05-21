@@ -15,7 +15,7 @@ void Interface::CommandRoutine()
     cin >> currentCommand;
     while (!cin.eof())
     {
-        if (currentCommand == "Move") // TODO implement in RobotDB.h
+        if (currentCommand == "Move")
         {
             cin >> rname;
             cin >> direction;
@@ -23,7 +23,7 @@ void Interface::CommandRoutine()
                 if (_pRobots->moveRobot(rname, direction)) // if move successful,
                     _pRobots->printLocation(rname); // print new location
         }
-        else if (currentCommand == "MoveMulti") // TODO implement in RobotDB.h
+        else if (currentCommand == "MoveMulti")
         {
             string nextDirection;
             queue<string> instructionQueue;
@@ -43,7 +43,7 @@ void Interface::CommandRoutine()
                 instructionQueue.pop();
             }
         }
-        else if (currentCommand == "MoveBuild") // TODO implement in RobotDB.h
+        else if (currentCommand == "MoveBuild")
         {
             cin >> rname;
             cin >> direction;
@@ -58,7 +58,7 @@ void Interface::CommandRoutine()
             }
 
         }
-        else if (currentCommand == "Clean") // TODO implement in RobotDB.h
+        else if (currentCommand == "Clean")
         {
             cin >> rname;
             if (_pRobots->robotCommunicable(rname) == COMMUNICABLE)
@@ -67,7 +67,7 @@ void Interface::CommandRoutine()
                     _pRobots->printClean(rname);
             }
         }
-        else if (currentCommand == "Place") // TODO implement in RobotDB.h
+        else if (currentCommand == "Place")
         {
             cin >> rname;
             cin >> coordX;
@@ -76,12 +76,12 @@ void Interface::CommandRoutine()
             if (_pRobots->placeRobot(rname, rCoord))
                 _pRobots->printLocation(rname);
         }
-        else if (currentCommand == "Delete") // TODO implement in RobotDB.h
+        else if (currentCommand == "Delete")
         {
             cin >> rname;
             _pRobots->deleteRobot(rname);
         }
-        else if (currentCommand == "AddDirt") // TODO implement in Map.h
+        else if (currentCommand == "AddDirt")
         {
             cin >> coordX;
             cin >> coordY;
@@ -91,7 +91,7 @@ void Interface::CommandRoutine()
                 && _interfaceMap->getCellStatus(rCoord) != WALL)
                 _interfaceMap->addDirt(rCoord);
         }
-        else if (currentCommand == "AddWall") // TODO implement in Map.h
+        else if (currentCommand == "AddWall")
         {
             cin >> coordX;
             cin >> coordY;
@@ -99,7 +99,7 @@ void Interface::CommandRoutine()
             if (!_pRobots->existsInCoord(rCoord))
                 _interfaceMap->addWall(rCoord);
         }
-        else if (currentCommand == "AddPath") // TODO implement in Map.h
+        else if (currentCommand == "AddPath")
         {
             cin >> coordX;
             cin >> coordY;

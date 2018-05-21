@@ -94,6 +94,7 @@ Coordinate RobotDB::directionToCoords(const string &rname, const string &directi
     {
         return _robots[robotIndex]->directionToCoord(direction);
     }
+    else return NULL;
 }
 
 connection_e RobotDB::robotCommunicable(const string &rname) const
@@ -131,10 +132,11 @@ bool RobotDB::cleanRobot(const string &rname)
 
 RobotDB::~RobotDB()
 {
-    for (RobotVec_it it = _robots.begin(); it != _robots.end(); it++)
+    while(!_robots.empty())
     {
-        string delName = (*it)->getName();
-        deleteRobot(delName);
+        RobotVec_it it = _robots.begin();
+        _robots.erase(_robots.begin());
+        delete *it;
     }
 }
 

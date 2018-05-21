@@ -110,7 +110,7 @@ public:
      *
      * used for debugging
      */
-    inline void printMap() const;
+    void printMap() const;
 };
 
 
