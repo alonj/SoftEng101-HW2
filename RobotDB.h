@@ -29,12 +29,12 @@ private:
     const int getRobotIndex(const string &rname) const;
 
 public:
-    explicit RobotDB(Map *newMap)
+    explicit RobotDB(Map *newMap) // default constructor
     {
         _map = newMap;
     };
 
-    ~RobotDB();
+    ~RobotDB(); // destructor
 
     /**
      * function removes specified robot from the robot vector "robots"

@@ -31,9 +31,9 @@ public:
     // #################### Class methods ####################
 
     Robot(const Coordinate &coordinate, const string &name) : _coordinate(coordinate), _name(name),
-                                                              _connection(COMMUNICABLE), _dust_bin(0) {}
+                                                              _connection(COMMUNICABLE), _dust_bin(0) {} // default constructor
 
-    ~Robot(){};
+    ~Robot(){}; // destructor
 
     /**
      * function that prints robot location
