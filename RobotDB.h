@@ -17,8 +17,8 @@ typedef std::vector<Robot *>::const_iterator RobotVec_cit;
 class RobotDB
 {
 private:
-    RobotVec _robots;
-    Map *_map;
+    RobotVec robots;
+    Map *map;
 
     /**
      * function returns index of specified robot name in the robot vector "robots" of
@@ -26,12 +26,12 @@ private:
      * @param rname : name of the specified robot
      * @return integer index in vector
      */
-    const int getRobotIndex(const string &rname) const;
+    int getRobotIndex(const string &rname) const;
 
 public:
     explicit RobotDB(Map *newMap) // default constructor
     {
-        _map = newMap;
+        map = newMap;
     };
 
     ~RobotDB(); // destructor
@@ -64,7 +64,7 @@ public:
      * @param coord : specified coordinates
      * @return : true if exists
      */
-    const bool existsInCoord(const Coordinate &coord) const;
+    bool existsInCoord(const Coordinate &coord) const;
 
     /**
      * function cleans cell in the coordinates of the specified robot (i.e:

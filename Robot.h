@@ -9,10 +9,7 @@
 
 using namespace std;
 
-typedef enum
-{
-    COMMUNICABLE = 0, NON_COMMUNICABLE = 1
-} connection_e;
+typedef enum{COMMUNICABLE = 0, NON_COMMUNICABLE = 1} connection_e;
 
 /**
  * Robot class role is to hold all the data and operations (function) of a single robot.
@@ -21,17 +18,17 @@ class Robot
 {
 
 private:
-    Coordinate _coordinate;
-    const string _name;
-    int _dust_bin;
+    Coordinate coordinate;
+    const string name;
+    int dust_bin;
     int _score;
     connection_e _connection;
 
 public:
     // #################### Class methods ####################
 
-    Robot(const Coordinate &coordinate, const string &name) : _coordinate(coordinate), _name(name),
-                                                              _connection(COMMUNICABLE), _dust_bin(0) {} // default constructor
+    Robot(const Coordinate &coordinate, const string &name) : coordinate(coordinate), name(name), dust_bin(0), _score(0),
+                                                              _connection(COMMUNICABLE) {} // default constructor
 
     ~Robot(){}; // destructor
 
@@ -40,8 +37,8 @@ public:
      */
     inline void printLoc()
     {
-        cout << "Robot: " << this->_name;
-        _coordinate.print();
+        cout << "Robot: " << this->name;
+        coordinate.print();
     }
 
     /**
@@ -49,9 +46,9 @@ public:
      */
     inline void printClean()
     {
-        cout << "Robot: " << this->_name << " is cleaning";
-        _coordinate.print();
-        cout << "dust bin: " << _dust_bin << endl;
+        cout << "Robot: " << this->name << " is cleaning";
+        coordinate.print();
+        cout << "dust bin: " << dust_bin << endl;
     }
 
     /**
@@ -66,7 +63,7 @@ public:
      */
     inline const string &getName() const
     {
-        return _name;
+        return name;
     }
 
     /**
@@ -75,7 +72,7 @@ public:
      */
     inline Coordinate getCoordinate() const
     {
-        return _coordinate;
+        return coordinate;
     }
 
     /**
@@ -84,7 +81,7 @@ public:
      */
     inline void setCoordinate(const Coordinate &coordinate)
     {
-        Robot::_coordinate = coordinate;
+        Robot::coordinate = coordinate;
         if (coordinate.outOfBounds())
             _connection = NON_COMMUNICABLE;
     }
@@ -105,7 +102,7 @@ public:
      */
     inline int getDustBin() const
     {
-        return _dust_bin;
+        return dust_bin;
     }
 
     /**
@@ -113,7 +110,7 @@ public:
      */
     inline void incDustBin()
     {
-        _dust_bin++;
+        dust_bin++;
     }
 
     /**
@@ -121,7 +118,7 @@ public:
      */
     inline void zeroDustBin()
     {
-        _dust_bin = 0;
+        dust_bin = 0;
     }
 
     /**

@@ -6,9 +6,9 @@
 
 Coordinate Robot::directionToCoord(const string &direction) const
 {
-    Coordinate result = _coordinate;
-    int currX = _coordinate.getX();
-    int currY = _coordinate.getY();
+    Coordinate result = coordinate;
+    int currX = coordinate.getX();
+    int currY = coordinate.getY();
     if (direction == "U" || direction == "UL" || direction == "UR")
         result.setX(--currX);
     if (direction == "D" || direction == "DL" || direction == "DR")

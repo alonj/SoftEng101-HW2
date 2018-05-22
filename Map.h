@@ -16,31 +16,36 @@
 using std::string;
 
 typedef int size_type;
-typedef int **grid_type;
-typedef enum {PATH = 0, WALL = 1, DIRT = 2} CellType;
+typedef int** grid_type;
+typedef enum {PATH = 0, WALL = 1, DIRT = 2, UNDEFINED = 3} CellType;
 
 class Map
 {
 private:
-    grid_type _gmap;
-    int _mapHeight;
-    int _mapWidth;
+    grid_type ppGrid;
+    size_type size_h;
+    size_type size_w;
 public:
 /** Constructor defaults to gmap as outlined in the HW instructions
  * map width/height default to S_WIDTH, S_HIGH (respectively)
  */
-    Map()
+    Map() : size_h(S_HIGH), size_w(S_WIDTH) // default constructor
     {
-        _gmap = new size_type *[S_HIGH];
-        _gmap[0] = new size_type[S_WIDTH]{0, 1, 1, 1, 1, 1, 1};
-        _gmap[1] = new size_type[S_WIDTH]{1, 2, 2, 0, 1, 0, 1};
-        _gmap[2] = new size_type[S_WIDTH]{0, 0, 1, 1, 1, 2, 1};
-        _gmap[3] = new size_type[S_WIDTH]{1, 0, 0, 0, 0, 0, 1};
-        _gmap[4] = new size_type[S_WIDTH]{1, 1, 1, 2, 1, 0, 1};
-        _gmap[5] = new size_type[S_WIDTH]{1, 0, 0, 0, 0, 2, 1};
-        _gmap[6] = new size_type[S_WIDTH]{1, 0, 1, 1, 1, 1, 1};
-        _mapHeight = S_HIGH;
-        _mapWidth = S_WIDTH;
+        size_type initGrid[S_HIGH][S_WIDTH] = {
+                {0, 1, 1, 1, 1, 1, 1},
+                {1, 2, 2, 0, 1, 0, 1},
+                {0, 0, 1, 1, 1, 2, 1},
+                {1, 0, 0, 0, 0, 0, 1},
+                {1, 1, 1, 2, 1, 0, 1},
+                {1, 0, 0, 0, 0, 2, 1},
+                {1, 0, 1, 1, 1, 1, 1}
+        };
+        ppGrid = new size_type *[S_HIGH];
+        for(int i = 0; i < S_HIGH; i++)
+            ppGrid[i] = new size_type[S_WIDTH];
+        for(int i = 0; i < S_HIGH; i++)
+            for(int j = 0; j < S_WIDTH; j++)
+                ppGrid[i][j] = initGrid[i][j];
     };
 
     virtual ~Map(); // destructor
