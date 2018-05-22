@@ -4,6 +4,7 @@
 
 #include "Interface.h"
 #include <queue>
+#include <signal.h>
 
 using namespace std;
 
