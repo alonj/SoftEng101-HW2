@@ -2,7 +2,7 @@
 // Created by alonj on 5/13/18.
 //
 
-#include "RobotDB.h"
+#include "includes/RobotDB.h"
 
 int RobotDB::getRobotIndex(const string &rname) const
 {
@@ -27,7 +27,7 @@ bool RobotDB::moveRobot(const string &rname, const string &direction)
     if (robotIndex != -1)
     { // if robot exists
         Robot *currRobot = robots[robotIndex];
-        Coordinate newCoords = currRobot->directionToCoord(direction);
+        Coordinate newCoords = currRobot->moveInstructionResult(direction);
         CellType cellStatus = map->getCellStatus(newCoords);
         if (cellStatus != WALL || !map->inMapLimit(newCoords))
         {
@@ -91,7 +91,7 @@ Coordinate RobotDB::directionToCoords(const string &rname, const string &directi
 {
     int robotIndex = getRobotIndex(rname);
     if (robotIndex != -1)
-        return robots[robotIndex]->directionToCoord(direction);
+        return robots[robotIndex]->moveInstructionResult(direction);
     else
         return Coordinate(-1,-1);
 }

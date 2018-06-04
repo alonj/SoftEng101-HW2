@@ -2,9 +2,9 @@
 // Created by alonj on 5/13/18.
 //
 
-#include "Robot.h"
+#include "includes/RobotTypes/Robot.h"
 
-Coordinate Robot::directionToCoord(const string &direction) const
+virtual Coordinate Robot::moveInstructionResult(const string &direction) const
 {
     Coordinate result = coordinate;
     int currX = coordinate.getX();

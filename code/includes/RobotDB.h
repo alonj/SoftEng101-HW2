@@ -7,7 +7,7 @@
 
 
 #include <vector>
-#include "Robot.h"
+#include "RobotTypes/Robot.h"
 #include "Map.h"
 
 typedef std::vector<Robot *> RobotVec;

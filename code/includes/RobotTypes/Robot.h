@@ -4,8 +4,8 @@
 #include <iostream>
 #include <string>
 
-#include "Coordinate.h"
-#include "Map.h"
+#include "../Coordinate.h"
+#include "../Map.h"
 
 using namespace std;
 
@@ -17,9 +17,10 @@ typedef enum{COMMUNICABLE = 0, NON_COMMUNICABLE = 1} connection_e;
 class Robot
 {
 
-private:
+protected:
     Coordinate coordinate;
     const string name;
+    string type;
     int dust_bin;
     int _score;
     connection_e _connection;
@@ -27,10 +28,20 @@ private:
 public:
     // #################### Class methods ####################
 
-    Robot(const Coordinate &coordinate, const string &name) : coordinate(coordinate), name(name), dust_bin(0), _score(0),
+    Robot(const Coordinate &coordinate, const string &new_name, string &new_type) : coordinate(coordinate),
+                                                                                    name(new_name),
+                                                                                    type(new_type),
+                                                                                    dust_bin(0),
+                                                                                    _score(0),
                                                               _connection(COMMUNICABLE) {} // default constructor
 
-    ~Robot(){}; // destructor
+    virtual ~Robot(); // destructor
+    Robot() = default;
+
+    virtual void print()
+    {
+        printType(std::string("REGULAR"));
+    };
 
     /**
      * function that prints robot location
@@ -55,7 +66,7 @@ public:
      * function changes robot's coordinate in the direction passed to method.
      * @param direction : Direction in which robot will move.
      */
-    Coordinate directionToCoord(const string &direction) const;
+    virtual Coordinate moveInstructionResult(const string &direction) const;
 
     /**
      * function returns robot's name
@@ -128,6 +139,14 @@ public:
     {
         _score++;
     }
+
+protected:
+    virtual void printType(const std::string & type_name)
+    {
+        std::cout << "Robot: " << this-> name << " Type: " << type_name;
+            coordinate.print();
+    };
+
 };
 
 #endif
