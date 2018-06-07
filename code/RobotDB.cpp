@@ -116,9 +116,7 @@ void RobotDB::printMap() const
         for (int j = 0; j < map->getMap_w(); j++)
         {
             Coordinate currCoord(i, j);
-            if (existsInCoord(currCoord) && map->getCellStatus(currCoord) == DIRT) cout << 'D';
-            else if (existsInCoord(currCoord)) cout << 'C';
-            else if (map->getCellStatus(currCoord) == DIRT) cout << 'o';
+            if (existsInCoord(currCoord)) cout << 'C';
             else if (map->getCellStatus(currCoord) == WALL) cout << '#';
             else if (map->getCellStatus(currCoord) == PATH) cout << ' ';
         }
