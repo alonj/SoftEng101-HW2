@@ -40,7 +40,7 @@ bool RobotDB::moveRobot(const string &rname, const string &direction)
     else return false;
 }
 
-bool RobotDB::placeRobot(const string &rname, Coordinate &coordinate)
+bool RobotDB::placeRobot(const string &rname, Coordinate &coordinate, const string &type)
 {
     if (!map->inMapLimit(coordinate) or map->getCellStatus(coordinate) == WALL)
         return false;
@@ -64,16 +64,6 @@ void RobotDB::deleteRobot(const std::string &rname)
         Robot *robotToDelete = robots[robotIndex];
         robots.erase(it);
         delete robotToDelete;
-    }
-}
-
-void RobotDB::printClean(const string &rname) const
-{
-    int robotIndex = getRobotIndex(rname);
-    if (robotIndex != -1)
-    {
-        Robot *currRobot = robots[robotIndex];
-        currRobot->printClean();
     }
 }
 
@@ -104,30 +94,6 @@ connection_e RobotDB::robotCommunicable(const string &rname) const
     else return NON_COMMUNICABLE;
 }
 
-bool RobotDB::cleanRobot(const string &rname)
-{
-    int robotIndex = getRobotIndex(rname);
-    if (robotIndex != -1)
-    {
-        Robot *currRobot = robots[robotIndex];
-        Coordinate currCoordinate = currRobot->getCoordinate();
-        if (currRobot->getDustBin() == 5)
-        {
-            currRobot->setCoordinate(Coordinate(0, 0));
-            currRobot->zeroDustBin();
-            return false;
-        }
-        CellType currentCellStatus = map->getCellStatus(currCoordinate);
-        map->cleanDirt(currCoordinate);
-        if (currentCellStatus > map->getCellStatus(currCoordinate))
-        {
-            currRobot->incScore();
-            currRobot->incDustBin();
-            return true;
-        }
-    }
-    return false;
-}
 
 RobotDB::~RobotDB()
 {

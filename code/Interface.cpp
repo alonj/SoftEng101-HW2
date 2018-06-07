@@ -44,53 +44,40 @@ void Interface::CommandRoutine()
                 instructionQueue.pop();
             }
         }
-        else if (currentCommand == "MoveBuild")
+        else if (currentCommand == "PlaceRegularRobot")
         {
-            cin >> rname;
-            cin >> direction;
-            if (pRobots->robotCommunicable(rname) == COMMUNICABLE)
-            {
-                Coordinate rCoord = pRobots->directionToCoords(rname, direction);
-                if (_iMap->getCellStatus(rCoord) == WALL)
-                    _iMap->addPath(rCoord);
-                if (pRobots->moveRobot(rname, direction))
-                    pRobots->printLocation(rname);
-
-            }
-
+            continue; // TODO
         }
-        else if (currentCommand == "Clean")
+        else if (currentCommand == "PlaceQuickRobot")
         {
-            cin >> rname;
-            if (pRobots->robotCommunicable(rname) == COMMUNICABLE)
-            {
-                if (pRobots->cleanRobot(rname))
-                    pRobots->printClean(rname);
-            }
+            continue; // TODO
         }
-        else if (currentCommand == "Place")
+        else if (currentCommand == "PlaceQuickLimitedRobot")
         {
-            cin >> rname;
+            continue; // TODO
+            /*cin >> rname;
             cin >> coordX;
             cin >> coordY;
             Coordinate rCoord(coordX, coordY);
-            if (pRobots->placeRobot(rname, rCoord))
-                pRobots->printLocation(rname);
+            if (pRobots->placeRobot(rname, rCoord, <#initializer#>))
+                pRobots->printLocation(rname);*/
+        }
+        else if (currentCommand == "PlaceStrongRobot")
+        {
+            continue; // TODO
+        }
+        else if (currentCommand == "PlaceWeakRobot")
+        {
+            continue; // TODO
+        }
+        else if (currentCommand == "PlaceSlowRobot")
+        {
+            continue; // TODO
         }
         else if (currentCommand == "Delete")
         {
             cin >> rname;
             pRobots->deleteRobot(rname);
-        }
-        else if (currentCommand == "AddDirt")
-        {
-            cin >> coordX;
-            cin >> coordY;
-            Coordinate rCoord(coordX, coordY);
-            if (!pRobots->existsInCoord(rCoord)
-                && _iMap->inMapLimit(rCoord)
-                && _iMap->getCellStatus(rCoord) != WALL)
-                _iMap->addDirt(rCoord);
         }
         else if (currentCommand == "AddWall")
         {

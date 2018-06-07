@@ -49,7 +49,7 @@ public:
      * @param coordinate : coordinate to place robot in
      * @return true if placement coordinates are valid
      */
-    bool placeRobot(const string &rname, Coordinate &coordinate);
+    bool placeRobot(const string &rname, Coordinate &coordinate, const string &type);
 
     /**
      * function moves robot one cell in the specified direction

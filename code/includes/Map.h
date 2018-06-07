@@ -17,7 +17,7 @@ using std::string;
 
 typedef int size_type;
 typedef int** grid_type;
-typedef enum {PATH = 0, WALL = 1, DIRT = 2, UNDEFINED = 3} CellType;
+typedef enum {PATH = 0, WALL = 1, UNDEFINED = 3} CellType;
 
 class Map
 {
@@ -33,11 +33,11 @@ public:
     {
         size_type initGrid[S_HIGH][S_WIDTH] = {
                 {0, 1, 1, 1, 1, 1, 1},
-                {1, 2, 2, 0, 1, 0, 1},
-                {0, 0, 1, 1, 1, 2, 1},
+                {1, 0, 0, 0, 1, 0, 1},
+                {0, 0, 1, 1, 1, 0, 1},
                 {1, 0, 0, 0, 0, 0, 1},
-                {1, 1, 1, 2, 1, 0, 1},
-                {1, 0, 0, 0, 0, 2, 1},
+                {1, 1, 1, 0, 1, 0, 1},
+                {1, 0, 0, 0, 0, 0, 1},
                 {1, 0, 1, 1, 1, 1, 1}
         };
         ppGrid = new size_type *[S_HIGH];
@@ -59,17 +59,6 @@ public:
  * @param coord : given coordinate
  */
     void addPath(const Coordinate &coord);
-
-/** Add a dirt to the map, meaning place 1 at x,y location. if coordinate > 0,0 and outside map, increases map size
- * @param coord: coordinate to add wall in
- */
-    void addDirt(const Coordinate &coord);
-
-/**
- * Clean dirt in the specified coordinates (i.e change value of cell to 0)
- * @param coord : coordinate to clean dirt in
- */
-    void cleanDirt(const Coordinate &coord);
 
 /**
  * Check if x,y coordinates are valid. valid - if the coordinates in the map is in the map limits.

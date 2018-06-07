@@ -11,18 +11,6 @@ using namespace std;
  * ###################### Module functions ######################
  */
 
-void Map::addDirt(const Coordinate &coord)
-{
-    if (inMapLimit(coord))
-        ppGrid[coord.getX()][coord.getY()] = DIRT;
-}
-
-void Map::cleanDirt(const Coordinate &coord)
-{
-    if (inMapLimit(coord))
-        ppGrid[coord.getX()][coord.getY()] = PATH;
-}
-
 void Map::addWall(const Coordinate &coord)
 {
     int x = coord.getX();
@@ -97,7 +85,6 @@ CellType Map::getCellStatus(const Coordinate &coord)
     int cellValue = ppGrid[x][y];
     if (cellValue == 0) return PATH;
     else if (cellValue == 1) return WALL;
-    else if (cellValue == 2) return DIRT;
     else return UNDEFINED;
 }
 
