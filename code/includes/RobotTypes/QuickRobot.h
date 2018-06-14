@@ -10,7 +10,8 @@
 class QuickRobot: public Robot
 {
 public:
-    QuickRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type){};
+    QuickRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type):
+            Robot(new_coordinate, new_name, new_type){};
     virtual ~QuickRobot(){};
     virtual Coordinate moveInstructionResult(const string &direction) const;
     virtual void print()

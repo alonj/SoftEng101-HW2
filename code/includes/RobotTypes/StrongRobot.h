@@ -10,7 +10,8 @@
 class StrongRobot: public Robot
 {
 public:
-    StrongRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type){};
+    StrongRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type):
+            Robot(new_coordinate, new_name, new_type){};
     virtual ~StrongRobot(){};
     virtual Coordinate moveInstructionResult(const string &direction) const;
     virtual void print()

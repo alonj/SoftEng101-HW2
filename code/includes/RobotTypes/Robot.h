@@ -35,7 +35,7 @@ public:
                                                               _connection(COMMUNICABLE) {} // default constructor
 
     virtual ~Robot(){}; // destructor
-    Robot();
+//    Robot();
 
     virtual void print()
     {

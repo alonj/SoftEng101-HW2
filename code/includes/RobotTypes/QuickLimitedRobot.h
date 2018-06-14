@@ -10,17 +10,12 @@
 class QuickLimitedRobot: public Robot
 {
 private:
-    int _limit;
+    int limit;
 public:
-    QuickLimitedRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type, int limit)/* :
-            coordinate(new_coordinate),
-            name(new_name),
-            type(new_type),
-            dust_bin(0),
-            _score(0),
-            _connection(COMMUNICABLE),*/
-            {_limit = limit;};
-    virtual ~QuickLimitedRobot();
+    QuickLimitedRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type, int limit):
+            Robot(new_coordinate, new_name, new_type),
+            limit(limit) {};
+    virtual ~QuickLimitedRobot(){};
     virtual Coordinate moveInstructionResult(const string &direction) const;
     virtual void print()
     {
