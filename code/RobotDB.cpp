@@ -22,7 +22,7 @@ bool RobotDB::existsInCoord(const Coordinate &coord) const
 }
 
 bool RobotDB::moveRobot(const string &rname, const string &direction)
-{ // TODO add database restrictions
+{
     int robotIndex = getRobotIndex(rname);
     if (robotIndex != -1)
     { // if robot exists

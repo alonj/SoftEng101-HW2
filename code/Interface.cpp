@@ -18,8 +18,7 @@ void Interface::CommandRoutine()
     {
         if (currentCommand == "Move")
         {
-            cin >> rname;
-            cin >> direction;
+            cin >> rname >> direction;
             if (pRobots->robotCommunicable(rname) == COMMUNICABLE)
                 if (pRobots->moveRobot(rname, direction)) // if move successful,
                     pRobots->printLocation(rname); // print new location
@@ -28,8 +27,7 @@ void Interface::CommandRoutine()
         {
             string nextDirection;
             queue<string> instructionQueue;
-            cin >> rname;
-            cin >> nextDirection;
+            cin >> rname >> nextDirection;
             while (nextDirection != "end") // save set on instructions into vector.
             {
                 instructionQueue.push(nextDirection);
@@ -39,55 +37,26 @@ void Interface::CommandRoutine()
             {
                 if (pRobots->robotCommunicable(rname) == COMMUNICABLE)
                     if (pRobots->moveRobot(rname,
-                                            instructionQueue.front())) // Move robot per instructions and print only after "end" instruction received.
+                                           instructionQueue.front())) // Move robot per instructions and print only after "end" instruction received.
                         pRobots->printLocation(rname);
                 instructionQueue.pop();
             }
         }
-        else if (currentCommand == "PlaceRegularRobot"
-                 || currentCommand == "PlaceQuickRobot"
-                 || currentCommand == "PlaceQuickLimitedRobot"
-                 || currentCommand == "PlaceStrongRobot"
-                 || currentCommand == "PlaceWeakRobot"
-                 || currentCommand == "PlaceSlowRobot")
+        else if (   currentCommand == "PlaceRegularRobot"      ||
+                    currentCommand == "PlaceQuickRobot"        ||
+                    currentCommand == "PlaceQuickLimitedRobot" ||
+                    currentCommand == "PlaceStrongRobot"       ||
+                    currentCommand == "PlaceWeakRobot"         ||
+                    currentCommand == "PlaceSlowRobot"  )
         {
             int limit = 0;
-            cin >> rname;
-            cin >> coordX;
-            cin >> coordY;
-            Coordinate rCoord(coordX, coordY);
-            unsigned long subStrEnd = currentCommand.length() - currentCommand.find("Robot");
-            string rtype = currentCommand.substr(5,subStrEnd); // get type of robot from command input
+            cin >> rname >> coordX >> coordY;
+            Coordinate rcoord(coordX, coordY);
+            string rtype = currentCommand.substr(5, currentCommand.find("Robot")-5); // extract robot type from command input
             if(rtype == "QuickLimited")
                 cin >> limit;
-            if (pRobots->placeRobot(rname, rCoord, rtype, limit))
+            if (pRobots->placeRobot(rname, rcoord, rtype, limit))
                 pRobots->printLocation(rname);
-        }
-        else if (currentCommand == "PlaceQuickRobot")
-        {
-            continue; // TODO
-        }
-        else if (currentCommand == "PlaceQuickLimitedRobot")
-        {
-            continue; // TODO
-            /*cin >> rname;
-            cin >> coordX;
-            cin >> coordY;
-            Coordinate rCoord(coordX, coordY);
-            if (pRobots->placeRobot(rname, rCoord, <#initializer#>))
-                pRobots->printLocation(rname);*/
-        }
-        else if (currentCommand == "PlaceStrongRobot")
-        {
-            continue; // TODO
-        }
-        else if (currentCommand == "PlaceWeakRobot")
-        {
-            continue; // TODO
-        }
-        else if (currentCommand == "PlaceSlowRobot")
-        {
-            continue; // TODO
         }
         else if (currentCommand == "Delete")
         {
@@ -96,16 +65,14 @@ void Interface::CommandRoutine()
         }
         else if (currentCommand == "AddWall")
         {
-            cin >> coordX;
-            cin >> coordY;
+            cin >> coordX >> coordY;
             Coordinate rCoord(coordX, coordY);
             if (!pRobots->existsInCoord(rCoord))
                 _iMap->addWall(rCoord);
         }
         else if (currentCommand == "AddPath")
         {
-            cin >> coordX;
-            cin >> coordY;
+            cin >> coordX >> coordY;
             Coordinate rCoord(coordX, coordY);
             _iMap->addPath(rCoord);
         }
@@ -119,5 +86,4 @@ void Interface::StartControl(Map *map)
     _iMap = map;
     cout << "Start entering commands:" << endl;
     CommandRoutine();
-//    PrintTable(robotName, robotScore, robotBinStatus);
 }
