@@ -19,7 +19,7 @@ void Interface::CommandRoutine()
         if (currentCommand == "Move")
         {
             cin >> rname >> direction;
-            if (pRobots->robotCommunicable(rname) == COMMUNICABLE)
+            if (pRobots->robotCommunicable(rname) == COMMUNICABLE && pRobots->robotType(rname) != "Slow")
                 if (pRobots->moveRobot(rname, direction)) // if move successful,
                     pRobots->printLocation(rname); // print new location
         }

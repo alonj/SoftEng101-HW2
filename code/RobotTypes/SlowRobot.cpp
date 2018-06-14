@@ -4,7 +4,7 @@
 
 #include "../includes/RobotTypes/SlowRobot.h"
 
-Coordinate SlowRobot::moveInstructionResult(const string &direction) const
+Coordinate SlowRobot::moveInstructionResult(const string &direction, Map *activeMap) const
 {
     Coordinate result = coordinate;
     int currX = coordinate.getX();

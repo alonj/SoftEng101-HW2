@@ -13,7 +13,7 @@ public:
     QuickRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type):
             Robot(new_coordinate, new_name, new_type){};
     virtual ~QuickRobot(){};
-    virtual Coordinate moveInstructionResult(const string &direction) const;
+    virtual Coordinate moveInstructionResult(const string &direction, Map *activeMap) const;
     virtual void print()
     {
         printType(std::string("QUICK"));

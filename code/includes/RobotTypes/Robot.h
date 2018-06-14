@@ -21,8 +21,6 @@ protected:
     Coordinate coordinate;
     const string name;
     string type;
-    int dust_bin;
-    int _score;
     connection_e _connection;
 public:
     // #################### Class methods ####################
@@ -30,8 +28,6 @@ public:
     Robot(const Coordinate &coordinate, const string &new_name, string &new_type) : coordinate(coordinate),
                                                                                     name(new_name),
                                                                                     type(new_type),
-                                                                                    dust_bin(0),
-                                                                                    _score(0),
                                                               _connection(COMMUNICABLE) {} // default constructor
 
     virtual ~Robot(){}; // destructor
@@ -52,20 +48,10 @@ public:
     }
 
     /**
-     * function that prints cleaning message for a certain robot
-     */
-    inline void printClean()
-    {
-        cout << "Robot: " << this->name << " is cleaning";
-        coordinate.print();
-        cout << "dust bin: " << dust_bin << endl;
-    }
-
-    /**
      * function changes robot's coordinate in the direction passed to method.
      * @param direction : Direction in which robot will move.
      */
-    virtual Coordinate moveInstructionResult(const string &direction) const;
+    virtual Coordinate moveInstructionResult(const string &direction, Map *activeMap) const;
 
     /**
      * function returns robot's name
@@ -106,37 +92,9 @@ public:
         return _connection;
     }
 
-    /**
-     * getter function for dust bin attribute
-     * @return : value of dust_bin (0 to 5)
-     */
-    inline int getDustBin() const
+    const string &getType() const
     {
-        return dust_bin;
-    }
-
-    /**
-     * increment function for dust_bin attribute
-     */
-    inline void incDustBin()
-    {
-        dust_bin++;
-    }
-
-    /**
-     * zeroing function for dust_bin attribute
-     */
-    inline void zeroDustBin()
-    {
-        dust_bin = 0;
-    }
-
-    /**
-     * increment function for score attribute
-     */
-    inline void incScore()
-    {
-        _score++;
+        return type;
     }
 
 protected:

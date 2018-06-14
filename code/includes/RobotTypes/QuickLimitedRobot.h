@@ -16,7 +16,7 @@ public:
             Robot(new_coordinate, new_name, new_type),
             limit(limit) {};
     virtual ~QuickLimitedRobot(){};
-    virtual Coordinate moveInstructionResult(const string &direction) const;
+    virtual Coordinate moveInstructionResult(const string &direction, Map *activeMap) const;
     virtual void print()
     {
         printType(std::string("QUICK_LIMITED"));

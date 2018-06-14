@@ -4,18 +4,25 @@
 
 #include "../includes/RobotTypes/QuickLimitedRobot.h"
 
-Coordinate QuickLimitedRobot::moveInstructionResult(const string &direction) const
+Coordinate QuickLimitedRobot::moveInstructionResult(const string &direction, Map *activeMap) const
 {
     Coordinate result = coordinate;
-    int currX = coordinate.getX();
-    int currY = coordinate.getY();
+    int remainingSteps = this->limit;
+    int diffX = 0;
+    int diffY = 0;
     if (direction == "U" || direction == "UL" || direction == "UR")
-        result.setX(--currX);
+        diffX = -1;
     if (direction == "D" || direction == "DL" || direction == "DR")
-        result.setX(++currX);
+        diffX = 1;
     if (direction == "L" || direction == "UL" || direction == "DL")
-        result.setY(--currY);
+        diffY = -1;
     if (direction == "R" || direction == "UR" || direction == "DR")
-        result.setY(++currY);
+        diffY = 1;
+    while(activeMap->getCellStatus(result) != WALL && activeMap->inMapLimit(result) && remainingSteps > 0)
+    {
+        result.setX(result.getX() + diffX);
+        result.setY(result.getY() + diffY);
+        remainingSteps--;
+    }
     return result;
 }

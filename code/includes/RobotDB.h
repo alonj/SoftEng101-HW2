@@ -70,19 +70,6 @@ public:
      */
     bool existsInCoord(const Coordinate &coord) const;
 
-    /**
-     * function cleans cell in the coordinates of the specified robot (i.e:
-     * turns cell value to 0 (PATH))
-     * @param rname : name of the specified robot
-     * @return : true if robot exists AND dust bin not full (value < 5)
-     */
-    bool cleanRobot(const string &rname);
-
-    /**
-     * function prints "clean" message with the specified robot name and coordinates
-     * @param rname : name of specified robot
-     */
-    void printClean(const string &rname) const;
 
     /**
      * function prints "location" message with the specified robot name and coordinates
@@ -90,14 +77,6 @@ public:
      */
     void printLocation(const string &rname) const;
 
-    /**
-     * function converts a given direction from a robot, into a coordinate object
-     * for example, robot coordinates = (2,2), given direction R, return is (2,3)
-     * @param rname : name of specified robot which coordinates serve as starting point
-     * @param direction : direction to move from known coordinates
-     * @return : coordinate object of the given direction from the robot
-     */
-    Coordinate directionToCoords(const string &rname, const string &direction);
 
     /**
      * function returns communicability status of specified robot
@@ -115,6 +94,8 @@ public:
      * used for debugging
      */
     void printMap() const;
+
+    string robotType(const string &rname) const;
 };
 
 

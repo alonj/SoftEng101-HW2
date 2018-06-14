@@ -27,9 +27,15 @@ bool RobotDB::moveRobot(const string &rname, const string &direction)
     if (robotIndex != -1)
     { // if robot exists
         Robot *currRobot = robots[robotIndex];
-        Coordinate newCoords = currRobot->moveInstructionResult(direction);
+        string currRobotType = currRobot->getType();
+        Coordinate newCoords = currRobot->moveInstructionResult(direction, map);
         CellType cellStatus = map->getCellStatus(newCoords);
-        if (cellStatus != WALL || !map->inMapLimit(newCoords))
+        if (cellStatus == WALL && currRobot->getType() == "Weak")
+        { // if Weak-type hits a wall, it is deleted and a specific msg printed, no need to print location. return.
+            delete currRobot;
+            return false;
+        }
+        else if (cellStatus != WALL || !map->inMapLimit(newCoords))
         {
             if (!map->inMapLimit(newCoords)) // if robot moves to out of bounds
                 currRobot->setCoordinate(Coordinate(-1, -1)); // place in -1,-1
@@ -89,15 +95,6 @@ void RobotDB::printLocation(const string &rname) const
     }
 }
 
-Coordinate RobotDB::directionToCoords(const string &rname, const string &direction)
-{
-    int robotIndex = getRobotIndex(rname);
-    if (robotIndex != -1)
-        return robots[robotIndex]->moveInstructionResult(direction);
-    else
-        return Coordinate(-1,-1);
-}
-
 connection_e RobotDB::robotCommunicable(const string &rname) const
 {
     int robotIndex = getRobotIndex(rname);
@@ -137,6 +134,16 @@ void RobotDB::printMap() const
     cout << ' ';
     for (int i = 0; i < map->getMap_w(); i++) cout << '-';
     cout << endl;
+}
+
+string RobotDB::robotType(const string &rname) const
+{
+    int robotIndex = getRobotIndex(rname);
+    if (robotIndex != -1)
+    { // if robot exists
+        Robot *currRobot = robots[robotIndex];
+        return currRobot->getType();
+    }
 }
 
 

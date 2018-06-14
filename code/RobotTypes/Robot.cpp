@@ -4,7 +4,7 @@
 
 #include "../includes/RobotTypes/Robot.h"
 
-Coordinate Robot::moveInstructionResult(const string &direction) const
+Coordinate Robot::moveInstructionResult(const string &direction, Map *activeMap) const
 {
     Coordinate result = coordinate;
     int currX = coordinate.getX();
