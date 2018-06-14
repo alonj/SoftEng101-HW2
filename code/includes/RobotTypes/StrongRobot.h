@@ -10,15 +10,13 @@
 class StrongRobot: public Robot
 {
 public:
-    StrongRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type) :
-            coordinate(new_coordinate),
-            name(new_name),
-            type(new_type),
-            dust_bin(0),
-            _score(0),
-            _connection(COMMUNICABLE) {};
-    virtual ~StrongRobot();
-    virtual void print();
+    StrongRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type){};
+    virtual ~StrongRobot(){};
+    virtual Coordinate moveInstructionResult(const string &direction) const;
+    virtual void print()
+    {
+        printType(std::string("STRONG"));
+    };
 
 };
 

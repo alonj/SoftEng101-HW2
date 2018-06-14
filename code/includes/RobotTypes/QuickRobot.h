@@ -9,18 +9,14 @@
 
 class QuickRobot: public Robot
 {
-private:
-
 public:
-    QuickRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type) : coordinate(new_coordinate),
-                                                                                                       name(new_name),
-                                                                                                       type(new_type),
-                                                                                                       dust_bin(0),
-                                                                                                       _score(0),
-                                                                                                       _connection(COMMUNICABLE) {};
-
-    virtual ~QuickRobot();
-    virtual void print();
+    QuickRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type){};
+    virtual ~QuickRobot(){};
+    virtual Coordinate moveInstructionResult(const string &direction) const;
+    virtual void print()
+    {
+        printType(std::string("QUICK"));
+    };
 };
 
 #endif //HW2ATTACHEDCODEFILES_QUICKROBOT_H

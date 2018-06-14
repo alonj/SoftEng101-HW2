@@ -1,10 +1,10 @@
 //
-// Created by alonj on 5/13/18.
+// Created by alonj on 6/14/18.
 //
 
-#include "includes/RobotTypes/Robot.h"
+#include "../includes/RobotTypes/SlowRobot.h"
 
-virtual Coordinate Robot::moveInstructionResult(const string &direction) const
+Coordinate SlowRobot::moveInstructionResult(const string &direction) const
 {
     Coordinate result = coordinate;
     int currX = coordinate.getX();
@@ -19,4 +19,3 @@ virtual Coordinate Robot::moveInstructionResult(const string &direction) const
         result.setY(++currY);
     return result;
 }
-

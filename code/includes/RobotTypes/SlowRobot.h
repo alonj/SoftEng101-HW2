@@ -10,15 +10,13 @@
 class SlowRobot: public Robot
 {
 public:
-    SlowRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type) :
-            coordinate(new_coordinate),
-            name(new_name),
-            type(new_type),
-            dust_bin(0),
-            _score(0),
-            _connection(COMMUNICABLE) {};
-    virtual ~SlowRobot();
-    virtual void print();
+    SlowRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type){};
+    virtual ~SlowRobot(){};
+    virtual Coordinate moveInstructionResult(const string &direction) const;
+    virtual void print()
+    {
+        printType(std::string("SLOW"));
+    };
 
 };
 

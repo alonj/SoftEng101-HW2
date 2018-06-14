@@ -24,7 +24,6 @@ protected:
     int dust_bin;
     int _score;
     connection_e _connection;
-
 public:
     // #################### Class methods ####################
 
@@ -35,8 +34,8 @@ public:
                                                                                     _score(0),
                                                               _connection(COMMUNICABLE) {} // default constructor
 
-    virtual ~Robot(); // destructor
-    Robot() = default;
+    virtual ~Robot(){}; // destructor
+    Robot();
 
     virtual void print()
     {
