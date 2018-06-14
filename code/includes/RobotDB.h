@@ -7,7 +7,11 @@
 
 
 #include <vector>
-#include "RobotTypes/Robot.h"
+#include "RobotTypes/QuickRobot.h"
+#include "RobotTypes/QuickLimitedRobot.h"
+#include "RobotTypes/SlowRobot.h"
+#include "RobotTypes/StrongRobot.h"
+#include "RobotTypes/WeakRobot.h"
 #include "Map.h"
 
 typedef std::vector<Robot *> RobotVec;
@@ -49,7 +53,7 @@ public:
      * @param coordinate : coordinate to place robot in
      * @return true if placement coordinates are valid
      */
-    bool placeRobot(const string &rname, Coordinate &coordinate, const string &type);
+    bool placeRobot(const string &rname, Coordinate &coordinate, string &type, int limit);
 
     /**
      * function moves robot one cell in the specified direction

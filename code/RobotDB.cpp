@@ -40,14 +40,26 @@ bool RobotDB::moveRobot(const string &rname, const string &direction)
     else return false;
 }
 
-bool RobotDB::placeRobot(const string &rname, Coordinate &coordinate, const string &type)
+bool RobotDB::placeRobot(const string &rname, Coordinate &coordinate, string &type, int limit = 0)
 {
     if (!map->inMapLimit(coordinate) or map->getCellStatus(coordinate) == WALL)
         return false;
     int robotIndex = this->getRobotIndex(rname);
     if (robotIndex == -1)
     {
-        Robot *newRobot = new Robot(coordinate, rname);
+        Robot* newRobot;
+        if(type == "Regular")
+            newRobot = new Robot(coordinate, rname, type);
+        else if(type == "Quick")
+            newRobot = new QuickRobot(coordinate, rname, type);
+        else if(type == "QuickLimited")
+            newRobot = new QuickLimitedRobot(coordinate, rname, type, limit);
+        else if(type == "Strong")
+            newRobot = new StrongRobot(coordinate, rname, type);
+        else if(type == "Weak")
+            newRobot = new WeakRobot(coordinate, rname, type);
+        else if(type == "Slow")
+            newRobot = new SlowRobot(coordinate, rname, type);
         robots.push_back(newRobot);
     }
     else

@@ -20,13 +20,6 @@ public:
             _score(0),
             _connection(COMMUNICABLE),
             limit(limit){};
-    QuickLimitedRobot(const Coordinate& new_coordinate, const std::string& new_name) :
-            coordinate(new_coordinate),
-            name(new_name),
-            type("quicklim"),
-            dust_bin(0),
-            _score(0),
-            _connection(COMMUNICABLE) {};
     virtual ~QuickLimitedRobot();
     virtual void print();
 };

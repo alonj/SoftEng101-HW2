@@ -9,17 +9,11 @@
 
 class WeakRobot: public Robot
 {
+public:
     WeakRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type) :
             coordinate(new_coordinate),
             name(new_name),
             type(new_type),
-            dust_bin(0),
-            _score(0),
-            _connection(COMMUNICABLE) {};
-    WeakRobot(const Coordinate& new_coordinate, const std::string& new_name) :
-            coordinate(new_coordinate),
-            name(new_name),
-            type("weak"),
             dust_bin(0),
             _score(0),
             _connection(COMMUNICABLE) {};

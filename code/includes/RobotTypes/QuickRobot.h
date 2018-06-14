@@ -19,13 +19,6 @@ public:
                                                                                                        _score(0),
                                                                                                        _connection(COMMUNICABLE) {};
 
-    QuickRobot(const Coordinate& new_coordinate, const std::string& new_name) :
-            coordinate(new_coordinate),
-            name(new_name),
-            type("quick"),
-            dust_bin(0),
-            _score(0),
-            _connection(COMMUNICABLE) {};
     virtual ~QuickRobot();
     virtual void print();
 };

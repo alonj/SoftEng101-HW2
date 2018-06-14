@@ -44,9 +44,24 @@ void Interface::CommandRoutine()
                 instructionQueue.pop();
             }
         }
-        else if (currentCommand == "PlaceRegularRobot")
+        else if (currentCommand == "PlaceRegularRobot"
+                 || currentCommand == "PlaceQuickRobot"
+                 || currentCommand == "PlaceQuickLimitedRobot"
+                 || currentCommand == "PlaceStrongRobot"
+                 || currentCommand == "PlaceWeakRobot"
+                 || currentCommand == "PlaceSlowRobot")
         {
-            continue; // TODO
+            int limit = 0;
+            cin >> rname;
+            cin >> coordX;
+            cin >> coordY;
+            Coordinate rCoord(coordX, coordY);
+            unsigned long subStrEnd = currentCommand.length() - currentCommand.find("Robot");
+            string rtype = currentCommand.substr(5,subStrEnd); // get type of robot from command input
+            if(rtype == "QuickLimited")
+                cin >> limit;
+            if (pRobots->placeRobot(rname, rCoord, rtype, limit))
+                pRobots->printLocation(rname);
         }
         else if (currentCommand == "PlaceQuickRobot")
         {
