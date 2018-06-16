@@ -13,7 +13,7 @@ void Interface::CommandRoutine()
     string currentCommand;
     string rname, direction;
     int coordX, coordY;
-    pRobots->printMap(); // TODO DO NOT LEAVE UNCOMMENTED
+    pRobots->debugPrint(); // TODO DO NOT LEAVE UNCOMMENTED
     cin >> currentCommand;
     while (!cin.eof())
     {
@@ -29,7 +29,7 @@ void Interface::CommandRoutine()
             string nextDirection;
             queue<string> instructionQueue;
             cin >> rname >> nextDirection;
-            while (nextDirection != "end") // save set on instructions into vector.
+            while (nextDirection != "end") // save set of instructions into vector.
             {
                 instructionQueue.push(nextDirection);
                 cin >> nextDirection;
@@ -43,7 +43,7 @@ void Interface::CommandRoutine()
                 instructionQueue.pop();
             }
         }
-        else if (   currentCommand.substr(0,5) == "Place"  )
+        else if (currentCommand.substr(0,5) == "Place")
         {
             int limit = 0;
             cin >> rname >> coordX >> coordY;
@@ -63,7 +63,7 @@ void Interface::CommandRoutine()
         {
             cin >> coordX >> coordY;
             Coordinate rCoord(coordX, coordY);
-            if (!pRobots->existsInCoord(rCoord))
+            if (pRobots->existsInCoord(rCoord) == ' ')
                 _iMap->addWall(rCoord);
         }
         else if (currentCommand == "AddPath")
@@ -72,7 +72,7 @@ void Interface::CommandRoutine()
             Coordinate rCoord(coordX, coordY);
             _iMap->addPath(rCoord);
         }
-        pRobots->printMap(); // TODO DO NOT LEAVE UNCOMMENTED
+        pRobots->debugPrint(); // TODO DO NOT LEAVE UNCOMMENTED
         cin >> currentCommand;
     }
 }

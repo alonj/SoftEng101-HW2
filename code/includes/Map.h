@@ -17,7 +17,7 @@ using std::string;
 
 typedef int size_type;
 typedef int** grid_type;
-typedef enum {PATH = 0, WALL = 1, UNDEFINED = 3} CellType;
+typedef enum {PATH = 0, WALL = 1, UNDEFINED = 3, OUT_OF_BOUNDS = -1} CellType;
 
 class Map
 {

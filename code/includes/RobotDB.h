@@ -93,7 +93,7 @@ public:
      *
      * used for debugging
      */
-    void printMap() const;
+    void debugPrint() const;
 
     string robotType(const string &rname) const;
 };

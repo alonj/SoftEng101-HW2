@@ -34,8 +34,8 @@ public:
      */
     bool operator==(const Coordinate &rhs) const
     {
-        return x == rhs.x &&
-               y == rhs.y;
+        return x == rhs.getX() &&
+               y == rhs.getY();
     }
 
     /**
@@ -46,6 +46,33 @@ public:
     bool operator!=(const Coordinate &rhs) const
     {
         return !(rhs == *this);
+    }
+
+
+    void operator+(const Coordinate &rhs)
+    {
+        x += rhs.getX();
+        y += rhs.getY();
+    }
+
+
+    void operator-(const Coordinate &rhs)
+    {
+        x -= rhs.getX();
+        y -= rhs.getY();
+    }
+
+    void operator+=(const Coordinate &rhs)
+    {
+        x += rhs.getX();
+        y += rhs.getY();
+    }
+
+
+    void operator-=(const Coordinate &rhs)
+    {
+        x -= rhs.getX();
+        y -= rhs.getY();
     }
 
     /**
@@ -83,6 +110,7 @@ public:
     {
         Coordinate::y = y;
     }
+
 
     /**
      * checks if coordinate is absolutely negative (x AND y are negative)

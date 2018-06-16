@@ -4,7 +4,8 @@
 
 #include "../includes/RobotTypes/SlowRobot.h"
 
-Coordinate SlowRobot::moveInstructionResult(const string &direction, Map *activeMap) const
+/*
+void SlowRobot::doMove(const string &direction, Map *activeMap) const
 {
     Coordinate result = coordinate;
     int currX = coordinate.getX();
@@ -17,5 +18,4 @@ Coordinate SlowRobot::moveInstructionResult(const string &direction, Map *active
         result.setY(--currY);
     if (direction == "R" || direction == "UR" || direction == "DR")
         result.setY(++currY);
-    return result;
-}
+}*/

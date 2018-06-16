@@ -19,8 +19,8 @@ void Map::addWall(const Coordinate &coord)
         ppGrid[x][y] = WALL;
     else if (x >= 0 && y >= 0)
     {
-        int newHeight = size_h + max((x - size_h), 0);
-        int newWidth = size_w + max((y - size_w), 0);
+        int newHeight = size_h + max((x + 1 - size_h), 0);
+        int newWidth = size_w + max((y + 1 - size_w), 0);
         increaseMapDimension(newHeight, newWidth);
     }
 }
@@ -82,6 +82,8 @@ CellType Map::getCellStatus(const Coordinate &coord)
 {
     int x = coord.getX();
     int y = coord.getY();
+    if(!inMapLimit(coord))
+        return OUT_OF_BOUNDS;
     int cellValue = ppGrid[x][y];
     if (cellValue == 0) return PATH;
     else if (cellValue == 1) return WALL;

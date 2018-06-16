@@ -7,6 +7,8 @@
 #include "../Coordinate.h"
 #include "../Map.h"
 
+#define COORD_OUT_OF_BOUNDS Coordinate(-1,-1)
+
 using namespace std;
 
 typedef enum{COMMUNICABLE = 0, NON_COMMUNICABLE = 1} connection_e;
@@ -51,7 +53,7 @@ public:
      * function changes robot's coordinate in the direction passed to method.
      * @param direction : Direction in which robot will move.
      */
-    virtual Coordinate moveInstructionResult(const string &direction, Map *activeMap) const;
+    virtual void doMove(const string &direction, Map *activeMap);
 
     /**
      * function returns robot's name
@@ -97,13 +99,14 @@ public:
         return type;
     }
 
+    static Coordinate directionVector(const string &direction);
+
 protected:
     virtual void printType(const std::string & type_name)
     {
         std::cout << "Robot: " << this-> name << " Type: " << type_name;
             coordinate.print();
     };
-
 };
 
 #endif
