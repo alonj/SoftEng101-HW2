@@ -13,12 +13,21 @@ int RobotDB::getRobotIndex(const string &rname) const
     return result;
 }
 
-bool RobotDB::existsInCoord(const Coordinate &coord) const
+char RobotDB::existsInCoord(const Coordinate &coord) const
 {
+    char result = ' ';
     for (RobotVec_cit cit = robots.begin(); cit != robots.end(); cit++)
         if ((*cit)->getCoordinate() == coord)
-            return true;
-    return false;
+            {
+                if(result != ' ')
+                    result = 'M';
+                else if((*cit)->getType() == "QuickLimited")
+                    result = 'L';
+                else if((*cit)->getType() == "Strong")
+                    result = 'T';
+                else result = (*cit)->getType()[0];
+            }
+    return result;
 }
 
 bool RobotDB::moveRobot(const string &rname, const string &direction)
@@ -125,7 +134,8 @@ void RobotDB::printMap() const
         for (int j = 0; j < map->getMap_w(); j++)
         {
             Coordinate currCoord(i, j);
-            if (existsInCoord(currCoord)) cout << 'C';
+            char robotInCoord = existsInCoord(currCoord);
+            if (robotInCoord != ' ') cout << robotInCoord;
             else if (map->getCellStatus(currCoord) == WALL) cout << '#';
             else if (map->getCellStatus(currCoord) == PATH) cout << ' ';
         }

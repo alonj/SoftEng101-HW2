@@ -13,6 +13,7 @@ void Interface::CommandRoutine()
     string currentCommand;
     string rname, direction;
     int coordX, coordY;
+    pRobots->printMap(); // TODO DO NOT LEAVE UNCOMMENTED
     cin >> currentCommand;
     while (!cin.eof())
     {
@@ -42,12 +43,7 @@ void Interface::CommandRoutine()
                 instructionQueue.pop();
             }
         }
-        else if (   currentCommand == "PlaceRegularRobot"      ||
-                    currentCommand == "PlaceQuickRobot"        ||
-                    currentCommand == "PlaceQuickLimitedRobot" ||
-                    currentCommand == "PlaceStrongRobot"       ||
-                    currentCommand == "PlaceWeakRobot"         ||
-                    currentCommand == "PlaceSlowRobot"  )
+        else if (   currentCommand.substr(0,5) == "Place"  )
         {
             int limit = 0;
             cin >> rname >> coordX >> coordY;
@@ -76,7 +72,7 @@ void Interface::CommandRoutine()
             Coordinate rCoord(coordX, coordY);
             _iMap->addPath(rCoord);
         }
-//        pRobots->printMap(); // uncomment for debugging
+        pRobots->printMap(); // TODO DO NOT LEAVE UNCOMMENTED
         cin >> currentCommand;
     }
 }

@@ -68,7 +68,7 @@ public:
      * @param coord : specified coordinates
      * @return : true if exists
      */
-    bool existsInCoord(const Coordinate &coord) const;
+    char existsInCoord(const Coordinate &coord) const;
 
 
     /**
