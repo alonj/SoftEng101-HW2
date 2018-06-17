@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "includes/Interface.h" // TODO move all files to single directory
+#include "includes/Interface.h"
 #include "includes/RobotDB.h"
 #include "includes/Map.h"
 

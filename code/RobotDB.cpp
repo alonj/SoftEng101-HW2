@@ -78,8 +78,18 @@ bool RobotDB::placeRobot(const string &rname, Coordinate &coordinate, string &ty
             newRobot = new SlowRobot(coordinate, rname, type);
         robots.push_back(newRobot);
     }
-    else
+    else if (robots[robotIndex]->getType() == type)
+    {
         robots[robotIndex]->setCoordinate(coordinate);
+        if(type == "Limited")
+            {
+                deleteRobot(rname);
+                Robot* newRobot = new QuickLimitedRobot(coordinate, rname, type, limit);
+                robots.push_back(newRobot);
+            }
+    }
+    else
+        return false;
     return true;
 }
 

@@ -64,8 +64,7 @@ void Interface::CommandRoutine()
         {
             cin >> coordX >> coordY;
             Coordinate rCoord(coordX, coordY);
-            if (pRobots->existsInCoord(rCoord) == ' ')
-                _iMap->addWall(rCoord);
+            _iMap->addWall(rCoord);
         }
         else if (currentCommand == "AddPath")
         {

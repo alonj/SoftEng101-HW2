@@ -22,7 +22,7 @@ class Robot
 protected:
     Coordinate coordinate;
     const string name;
-    string type;
+    const string type;
     connection_e connection_status;
 public:
     // #################### Class methods ####################
