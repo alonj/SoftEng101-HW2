@@ -95,6 +95,11 @@ public:
      */
     void debugPrint() const;
 
+    /**
+     * function returns type of specified robot
+     * @param rname : name of specified robot
+     * @return string of robot type
+     */
     string robotType(const string &rname) const;
 };
 

@@ -7,6 +7,10 @@
 
 #include "Robot.h"
 
+/**
+ * QuickLimitedRobot class role is a child class of Robot, holds all information and methods for robots of type: Quick Limited.
+ */
+
 class QuickLimitedRobot: public Robot
 {
 private:
@@ -14,12 +18,22 @@ private:
 public:
     QuickLimitedRobot(const Coordinate& new_coordinate, const std::string& new_name, std::string& new_type, int limit):
             Robot(new_coordinate, new_name, new_type),
-            limit(limit) {};
-    virtual ~QuickLimitedRobot(){};
+            limit(limit) {}; // default constructor
+    virtual ~QuickLimitedRobot(){}; // default destructor
+
+/**
+ * function changes robot coordinates according to its special ruleset
+ * @param direction : direction in which robot will move
+ * @param activeMap : map object where robot is currently on.
+ */
     virtual void doMove(const string &direction, Map *activeMap);
+
+/**
+ * function calls print of robot location and type.
+ */
     virtual void print()
     {
-        printType(std::string("QUICK_LIMITED"));
+        printType(std::string("LIMITED"));
     };
 };
 

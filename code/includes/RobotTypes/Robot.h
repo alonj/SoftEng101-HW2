@@ -23,31 +23,24 @@ protected:
     Coordinate coordinate;
     const string name;
     string type;
-    connection_e _connection;
+    connection_e connection_status;
 public:
     // #################### Class methods ####################
 
-    Robot(const Coordinate &coordinate, const string &new_name, string &new_type) : coordinate(coordinate),
+    Robot(const Coordinate& coordinate, const string& new_name, string& new_type) : coordinate(coordinate),
                                                                                     name(new_name),
                                                                                     type(new_type),
-                                                              _connection(COMMUNICABLE) {} // default constructor
+                                                              connection_status(COMMUNICABLE) {} // default constructor
 
     virtual ~Robot(){}; // destructor
-//    Robot();
 
+    /**
+     * function prints robot type and location
+     */
     virtual void print()
     {
         printType(std::string("REGULAR"));
     };
-
-    /**
-     * function that prints robot location
-     */
-    inline void printLoc()
-    {
-        cout << "Robot: " << this->name;
-        coordinate.print();
-    }
 
     /**
      * function changes robot's coordinate in the direction passed to method.
@@ -81,7 +74,7 @@ public:
     {
         Robot::coordinate = coordinate;
         if (coordinate.outOfBounds())
-            _connection = NON_COMMUNICABLE;
+            connection_status = NON_COMMUNICABLE;
     }
 
     /**
@@ -91,17 +84,30 @@ public:
 
     inline connection_e getConnection() const
     {
-        return _connection;
+        return connection_status;
     }
 
+    /**
+     * function returns type of robot
+     * @return string of robot Type
+     */
     const string &getType() const
     {
         return type;
     }
 
+    /**
+     * function returns an integer vector (x,y) of values in range [-1,1] according to the direction string input
+     * @param direction : U, D, L, R or any legal combination (8 total)
+     * @return Coordinate object of direction.
+     */
     static Coordinate directionVector(const string &direction);
 
 protected:
+    /**
+     * function prints location and type of Robot
+     * @param type_name : type to print
+     */
     virtual void printType(const std::string & type_name)
     {
         std::cout << "Robot: " << this-> name << " Type: " << type_name;

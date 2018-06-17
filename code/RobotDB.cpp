@@ -23,7 +23,7 @@ char RobotDB::existsInCoord(const Coordinate &coord) const
             {
                 if(result != ' ')
                     result = 'M';
-                else if((*cit)->getType() == "QuickLimited")
+                else if((*cit)->getType() == "Limited")
                     result = 'L';
                 else if((*cit)->getType() == "Strong")
                     result = 'T';
@@ -45,11 +45,12 @@ bool RobotDB::moveRobot(const string &rname, const string &direction)
             if(map->getCellStatus(newCoord) == WALL)
             {
                 delete (*it);
-                cout<<"Robot "<<rname<<" is dead";
+                cout<<"Robot "<<rname<<" is dead" << endl;
                 robots.erase(it);
+                return false;
             }
         }
-        else (*it)->doMove(direction, map);
+        (*it)->doMove(direction, map);
         return true; // true == print location
     }
     else return false; // false == robot doesnt exist, dont print location
@@ -67,7 +68,7 @@ bool RobotDB::placeRobot(const string &rname, Coordinate &coordinate, string &ty
             newRobot = new Robot(coordinate, rname, type);
         else if(type == "Quick")
             newRobot = new QuickRobot(coordinate, rname, type);
-        else if(type == "QuickLimited")
+        else if(type == "Limited")
             newRobot = new QuickLimitedRobot(coordinate, rname, type, limit);
         else if(type == "Strong")
             newRobot = new StrongRobot(coordinate, rname, type);
@@ -100,7 +101,7 @@ void RobotDB::printLocation(const string &rname) const
     if (robotIndex != -1)
     {
         Robot *currRobot = robots[robotIndex];
-        currRobot->printLoc();
+        currRobot->print();
     }
 }
 
@@ -115,18 +116,15 @@ connection_e RobotDB::robotCommunicable(const string &rname) const
 
 RobotDB::~RobotDB()
 {
-    while(!robots.empty())
-    {
-        RobotVec_it it = robots.begin();
-        robots.erase(robots.begin());
-        delete *it;
-    }
+    for(unsigned i = 0; i < robots.size(); i++)
+        delete robots[i];
+    robots.erase(robots.begin(), robots.end());
 }
 
 void RobotDB::debugPrint() const
 {
     cout << endl << "Current Robot List: ";
-    for (int i = 0; i < robots.size(); i ++)
+    for (unsigned i = 0; i < robots.size(); i ++)
         cout << ", " << robots[i]->getName() << "(" << robots[i]->getCoordinate().getX() << ',' << robots[i]->getCoordinate().getY() << ")";
     cout << endl;
     cout << "Current Map Status:" << endl << ' ';
@@ -158,6 +156,7 @@ string RobotDB::robotType(const string &rname) const
         Robot *currRobot = robots[robotIndex];
         return currRobot->getType();
     }
+    else return "NULL";
 }
 
 

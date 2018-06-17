@@ -103,8 +103,8 @@ int Map::getMap_w() const
 Map::~Map()
 {
     for(int i = 0; i < size_h; i++)
-        delete ppGrid[i];
-    delete ppGrid;
+        delete[] ppGrid[i];
+    delete[] ppGrid;
 }
 
 //########################################################################################

@@ -4,7 +4,6 @@
 
 #include "includes/Interface.h"
 #include <queue>
-#include <signal.h>
 
 using namespace std;
 
@@ -13,7 +12,6 @@ void Interface::CommandRoutine()
     string currentCommand;
     string rname, direction;
     int coordX, coordY;
-    pRobots->debugPrint(); // TODO DO NOT LEAVE UNCOMMENTED
     cin >> currentCommand;
     while (!cin.eof())
     {
@@ -50,7 +48,10 @@ void Interface::CommandRoutine()
             Coordinate rcoord(coordX, coordY);
             string rtype = currentCommand.substr(5, currentCommand.find("Robot")-5); // extract robot type from command input
             if(rtype == "QuickLimited")
-                cin >> limit;
+                {
+                    rtype = "Limited";
+                    cin >> limit;
+                }
             if (pRobots->placeRobot(rname, rcoord, rtype, limit))
                 pRobots->printLocation(rname);
         }
@@ -72,7 +73,7 @@ void Interface::CommandRoutine()
             Coordinate rCoord(coordX, coordY);
             _iMap->addPath(rCoord);
         }
-        pRobots->debugPrint(); // TODO DO NOT LEAVE UNCOMMENTED
+//        pRobots->debugPrint();
         cin >> currentCommand;
     }
 }

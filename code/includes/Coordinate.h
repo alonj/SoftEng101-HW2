@@ -48,27 +48,40 @@ public:
         return !(rhs == *this);
     }
 
-
+    /**
+     * plus operator for coordinates
+     * @param rhs : other coordinate.
+     */
     void operator+(const Coordinate &rhs)
     {
         x += rhs.getX();
         y += rhs.getY();
     }
 
-
+/**
+     * minus operator for coordinates
+     * @param rhs : other coordinate.
+     */
     void operator-(const Coordinate &rhs)
     {
         x -= rhs.getX();
         y -= rhs.getY();
     }
 
+    /**
+     * unary plus operator for coordinates
+     * @param rhs : other coordinate.
+     */
     void operator+=(const Coordinate &rhs)
     {
         x += rhs.getX();
         y += rhs.getY();
     }
 
-
+    /**
+     * unary minus operator for coordinates
+     * @param rhs : other coordinate.
+     */
     void operator-=(const Coordinate &rhs)
     {
         x -= rhs.getX();
